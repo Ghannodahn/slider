@@ -1,26 +1,7 @@
-import datetime
-import io
-import json
-import pprint
-
 from py.db import db_handler
-
-from flask import Flask, render_template
+from flask import Flask
 
 app = Flask(__name__)
-
-@app.route("/data/test")
-def data_test():
-    # For the sake of example, use static information to inflate the template.
-    # This will be replaced with real information in later steps.
-    dummy_data = {
-      "dates": [
-        datetime.datetime(2018, 1, 1, 10, 0, 0).strftime("%Y-%m-%d"),
-        datetime.datetime(2018, 1, 2, 10, 30, 0).strftime("%Y-%m-%d"),
-        datetime.datetime(2018, 1, 3, 11, 0, 0).strftime("%Y-%m-%d"),
-      ]}
-
-    return dummy_data
 
 @app.route("/data/<entity>")
 def data_connect(entity):
