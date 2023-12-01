@@ -20,7 +20,6 @@ import pg8000
 
 import sqlalchemy
 
-
 def connect_with_connector() -> sqlalchemy.engine.base.Engine:
     """
     Initializes a connection pool for a Cloud SQL instance of Postgres.
@@ -32,10 +31,10 @@ def connect_with_connector() -> sqlalchemy.engine.base.Engine:
     # Cloud Secret Manager (https://cloud.google.com/secret-manager) to help
     # keep secrets safe.
 
-    instance_connection_name = "hcastleh-playground:us-west1:finsoup-db"
-    db_user = "finsoup-db-user"  # e.g. 'my-db-user'
-    db_pass = "finsoup-pass"  # e.g. 'my-db-password'
-    db_name = "slidify"  # e.g. 'my-database'
+    db_instance = os.environ.get("DB_INSTANCE", "hcastleh-playground:us-west1:slider-db")
+    db_user = os.environ.get("DB_USER", "slideradmin")  # e.g. 'my-db-user'
+    db_pass = os.environ.get("DB_PASS", "ambivalent")  # e.g. 'my-db-password'
+    db_name = os.environ.get("DB_NAME", "slider")  # e.g. 'my-database'
 
     ip_type = IPTypes.PUBLIC
 
@@ -44,7 +43,7 @@ def connect_with_connector() -> sqlalchemy.engine.base.Engine:
 
     def getconn() -> pg8000.dbapi.Connection:
         conn: pg8000.dbapi.Connection = connector.connect(
-            instance_connection_name,
+            db_instance,
             "pg8000",
             user=db_user,
             password=db_pass,
