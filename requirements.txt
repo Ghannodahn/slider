@@ -1,0 +1,4 @@
+Flask==3.0.0
+pg8000==1.29.8
+SQLAlchemy==2.0.17
+cloud-sql-python-connector==1.2.4
