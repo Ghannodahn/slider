@@ -2,16 +2,12 @@ import datetime
 import io
 import json
 import pprint
-import sqlalchemy
 
-from py.db import db_connector
+from py.db import db_handler
 
 from flask import Flask, render_template
 
 app = Flask(__name__)
-
-def init_connection_pool() -> sqlalchemy.engine.base.Engine:
-  return db_connector.connect_with_connector()
 
 @app.route("/data/test")
 def data_test():
@@ -26,25 +22,10 @@ def data_test():
 
     return dummy_data
 
-@app.route("/data/connect")
-def data_connect():
-    db = init_connection_pool()
-
-    with db.connect() as conn:
-      rows = conn.execute(
-              sqlalchemy.text(
-                  "SELECT * FROM EventSession"
-              )
-          ).fetchall()
-    
-    result = {}
-
-    for row in rows:
-      result[row[0]] = {"sessionId": row[0], "startTime": row[1], "endTime": row[2]}
-
-    # For the sake of example, use static information to inflate the template.
-    # This will be replaced with real information in later steps.
-    return result
+@app.route("/data/<entity>")
+def data_connect(entity):
+  #return entity
+  return db_handler.DbHandler().handle_request(entity)
 
 if __name__ == "__main__":
     # This is used when running locally only. When deploying to Google App

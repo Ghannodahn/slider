@@ -20,7 +20,7 @@ import pg8000
 
 import sqlalchemy
 
-def connect_with_connector() -> sqlalchemy.engine.base.Engine:
+def CloudSqlConnector() -> sqlalchemy.engine.base.Engine:
     """
     Initializes a connection pool for a Cloud SQL instance of Postgres.
 
