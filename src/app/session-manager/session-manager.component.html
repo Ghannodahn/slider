@@ -9,6 +9,8 @@
   </div>
   <div class="roster-section">
     <div class="roster-header">Roster</div>
-    <div class="roster-entry">TBD</div>
+    <div 
+      class="roster-entry"
+      *ngFor="let performer of roster">{{ performer.displayName }}</div>
   </div>
 </main>

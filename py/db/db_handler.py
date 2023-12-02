@@ -11,11 +11,12 @@ class DbHandler:
   def __init__(self):
     self.db = init_connection_pool()
 
-  def handle_request(self, entity):
+  def handle_request(self, entity, args=None):
     if entity == "session":
       rtn = EventSession(self.db).list()
     elif entity == "roster":
-      rtn = Roster(self.db).list()
+      sessionId = args.get("sessionId")
+      rtn = Roster(self.db).list(sessionId)
     else:
       raise Exception("Request failed: Entity {0} does not exist.".format(entity))
     

@@ -1,5 +1,5 @@
 from py.db import db_handler
-from flask import Flask, render_template, Response
+from flask import Flask, render_template, request, Response
 import re
 
 app = Flask(__name__, template_folder="static")
@@ -7,7 +7,8 @@ app = Flask(__name__, template_folder="static")
 @app.route("/data/<entity>")
 def data_connect(entity):
   #return entity
-  return db_handler.DbHandler().handle_request(entity)
+  args = request.args
+  return db_handler.DbHandler().handle_request(entity, args)
 
 # Local Testing Only.
 @app.route("/<filename>")

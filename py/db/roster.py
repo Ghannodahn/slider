@@ -6,11 +6,11 @@ class Roster:
   def __init__(self, db):
     self.db = db
 
-  def list(self):
+  def list(self, sessionId):
     with self.db.connect() as conn:
       rows = conn.execute(
               sqlalchemy.text(
-                  "SELECT * FROM Roster"
+                  "SELECT * FROM Roster WHERE sessionId = {0}".format(sessionId)
               )
           ).fetchall()
     
