@@ -5,7 +5,7 @@
     *ngFor="let session of sessions" 
     class="session-entry"
     [class.session-selected]="selectedSession === session"
-    (click)="onClickSession(session)">{{ session.sessionId }}</div>
+    (click)="onClickSession(session)">{{ session.startTime | date:'y-MM-dd' }}</div>
   </div>
   <div class="roster-section">
     <div class="roster-header">Roster</div>

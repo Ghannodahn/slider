@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { DatePipe } from '@angular/common';
 
 import { Session } from '../sessions/session';
 import { SessionsService } from '../sessions/sessions.service';
@@ -9,7 +10,7 @@ import { RostersService } from '../rosters/rosters.service';
 @Component({
   selector: 'slider-session-manager',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, DatePipe],
   templateUrl: './session-manager.component.html',
   styleUrl: './session-manager.component.css'
 })
