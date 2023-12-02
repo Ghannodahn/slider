@@ -1,5 +1,6 @@
 import { CommonModule, DatePipe } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { LoadingPanelEntryComponent } from '../../loading-panel-entry/loading-panel-entry.component';
 import { Session, EmptySession } from '../session';
 import { SessionManagerStateService } from '../../session-manager/session-manager-state.service';
 import { SessionsService } from '../sessions.service';
@@ -9,7 +10,8 @@ import { SessionsService } from '../sessions.service';
   standalone: true,
   imports: [
     CommonModule, 
-    DatePipe
+    DatePipe,
+    LoadingPanelEntryComponent
   ],
   templateUrl: './session-panel.component.html',
   styleUrl: './session-panel.component.css'

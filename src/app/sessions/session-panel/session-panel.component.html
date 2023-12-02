@@ -1,5 +1,7 @@
 <div class="session-section">
   <div class="session-header">Sessions</div>
+  <slider-loading-panel-entry
+    *ngIf="stateService.isSessionLoading"></slider-loading-panel-entry>
   <div 
     *ngFor="let session of stateService.sessions" 
     class="session-entry"

@@ -22,8 +22,13 @@ export class SessionManagerStateService {
   ) {}
   
   public refreshSessions() {
+    this.isSessionLoading = true;
+
     this.sessionsService.listSessions()
-      .subscribe(sessions => this.sessions = sessions)
+      .subscribe(sessions => {
+        this.isSessionLoading = false;
+        this.sessions = sessions;
+      });
   }
   
   public refreshPerformer() {
@@ -32,9 +37,9 @@ export class SessionManagerStateService {
     this.isPerformerLoading = true;
 
     this.performersService.listPerformer(this.selectedSession.sessionId)
-      .subscribe(Performer => {    
+      .subscribe(performer => {    
         this.isPerformerLoading = false;
-        this.Performer = Performer;
+        this.Performer = performer;
       });
   }
 }
