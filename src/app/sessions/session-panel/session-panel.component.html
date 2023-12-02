@@ -1,0 +1,9 @@
+<div class="session-section">
+  <div class="session-header">Sessions</div>
+  <div 
+    *ngFor="let session of stateService.sessions" 
+    class="session-entry"
+    [class.session-selected]="stateService.selectedSession === session"
+    (click)="onClickSession(session)">
+    {{ session.startTime | date:'y-MM-dd' }}</div>
+</div>

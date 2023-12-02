@@ -1,35 +1,26 @@
 <main>
-  <div class="session-section">
-    <div class="session-header">Sessions</div>
-    <div 
-      *ngFor="let session of sessions" 
-      class="session-entry"
-      [class.session-selected]="selectedSession === session"
-      (click)="onClickSession(session)">
-      {{ session.startTime | date:'y-MM-dd' }}</div>
-  </div>
+  <slider-session-panel></slider-session-panel>
   <div class="roster-section">
     <div class="roster-header">Roster</div>
-    <div 
-      *ngIf="isRosterLoading"
-      class="section-loading">LOADING</div>
+    <slider-loading-panel-entry
+      *ngIf="stateService.isRosterLoading"></slider-loading-panel-entry>
     <div 
       class="roster-entry"
-      *ngFor="let performer of roster"
-      [class.roster-selected]="selectedPerformer === performer"
+      *ngFor="let performer of stateService.roster"
+      [class.roster-selected]="stateService.selectedPerformer === performer"
       (click)="onClickRoster(performer)">
       <div>{{ performer.displayName }}</div>
-      <div *ngIf="selectedPerformer === performer">
+      <div *ngIf="stateService.selectedPerformer === performer">
         <div 
-          *ngIf="selectedPerformer.socialIg"
+          *ngIf="stateService.selectedPerformer.socialIg"
           class="roster-attribute">
           &#64;{{ performer.socialIg }}
         </div>
         <div 
-          *ngIf="selectedPerformer.link"
+          *ngIf="stateService.selectedPerformer.link"
           class="roster-attribute">
           <a 
-            [href]="selectedPerformer.link"
+            [href]="stateService.selectedPerformer.link"
             target="_blank">
             {{ performer.link }}</a>
         </div>

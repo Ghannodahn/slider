@@ -1,0 +1,34 @@
+.section-loading {
+  padding: 8px;
+  font-weight: bold;
+  background-color: goldenrod;
+  text-align: center;
+}
+
+.session-section {
+  width: 200px;
+  float: left;
+}
+
+.session-header {
+  padding: 8px;
+  color: white;
+  background-color: navy;
+}
+
+.session-entry {
+  padding: 8px;
+}
+
+.session-entry:hover {
+  cursor: pointer;
+}
+
+.session-entry:hover:not(.session-selected) {
+  background-color: honeydew;
+}
+
+.session-selected {
+  font-weight: bold;
+  background-color: dodgerblue;
+}

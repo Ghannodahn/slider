@@ -17,7 +17,7 @@ const httpOptions = {
 })
 export class SessionsService {
   listUrl = "data/session"
-  
+
   constructor(private http: HttpClient) { }
 
   listSessions(): Observable<Session[]> {
