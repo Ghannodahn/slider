@@ -14,10 +14,10 @@ class EventSession:
               )
           ).fetchall()
     
-    result = {}
+    result = []
 
     for row in rows:
-      result[row[0]] = {"sessionId": row[0], "startTime": row[1], "endTime": row[2], "currentPos": row[3]}
+      result.append({"sessionId": row[0], "startTime": row[1], "endTime": row[2], "currentPos": row[3]})
 
     # For the sake of example, use static information to inflate the template.
     # This will be replaced with real information in later steps.

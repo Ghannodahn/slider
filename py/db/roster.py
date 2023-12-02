@@ -14,10 +14,10 @@ class Roster:
               )
           ).fetchall()
     
-    result = {}
+    result = []
 
     for row in rows:
-      result[row[0]] = {"rosterId": row[0], "sessionId": row[1], "displayName": row[2], "sessionPos": row[3]}
+      result.append({"rosterId": row[0], "sessionId": row[1], "displayName": row[2], "sessionPos": row[3]})
 
     # For the sake of example, use static information to inflate the template.
     # This will be replaced with real information in later steps.
