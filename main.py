@@ -1,12 +1,16 @@
 from py.db import db_handler
-from flask import Flask
+from flask import Flask, render_template
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder="static")
 
 @app.route("/data/<entity>")
 def data_connect(entity):
   #return entity
   return db_handler.DbHandler().handle_request(entity)
+
+@app.route("/")
+def show_index():
+  return render_template("browser/index.html")
 
 if __name__ == "__main__":
     # This is used when running locally only. When deploying to Google App

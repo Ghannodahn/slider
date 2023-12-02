@@ -3,17 +3,18 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "FinSoup": {
+    "Slider": {
       "projectType": "application",
       "schematics": {},
       "root": "",
       "sourceRoot": "src",
-      "prefix": "app",
+      "prefix": "slider",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/slider",
+            "outputPath": "static",
+            "baseHref": "/static/browser/",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -57,10 +58,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "FinSoup:build:production"
+              "buildTarget": "Slider:build:production"
             },
             "development": {
-              "buildTarget": "FinSoup:build:development"
+              "buildTarget": "Slider:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -68,7 +69,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "FinSoup:build"
+            "buildTarget": "Slider:build"
           }
         },
         "test": {
