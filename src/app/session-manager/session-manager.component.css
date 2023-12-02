@@ -1,0 +1,31 @@
+body {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.session-section {
+  width: 200px;
+}
+
+.session-header {
+  padding: 8px;
+  color: white;
+  background-color: navy;
+}
+
+.session-entry {
+  padding: 8px;
+}
+
+.roster-section {
+  width: 200px;
+}
+
+.roster-header {
+  padding: 8px;
+  color: white;
+  background-color: indigo;
+}
+
+.roster-entry {
+  padding: 8px;
+}

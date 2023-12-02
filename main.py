@@ -1,5 +1,6 @@
 from py.db import db_handler
-from flask import Flask, render_template
+from flask import Flask, render_template, Response
+import re
 
 app = Flask(__name__, template_folder="static")
 
@@ -8,6 +9,27 @@ def data_connect(entity):
   #return entity
   return db_handler.DbHandler().handle_request(entity)
 
+# Local Testing Only.
+@app.route("/<filename>")
+def show_file(filename):
+  file = open("static/browser/{0}".format(filename))
+  result = file.read()
+  file.close()
+
+  extension_re = re.search(".*\.(.*)", filename)
+  if extension_re:
+     extension = extension_re.group(1)
+
+     if extension == "html":
+        return Response(result, mimetype="text/html")
+     elif extension == "js":
+        return Response(result, mimetype="text/javascript")
+     elif extension == "css":
+        return Response(result, mimetype="text/css")
+        
+  return result
+
+# Local Testing Only.
 @app.route("/")
 def show_index():
   return render_template("browser/index.html")
