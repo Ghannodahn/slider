@@ -1,19 +1,10 @@
 <main>
   <div class="session-section">
-    
+    <div class="session-header">Sessions</div>
+    <div *ngFor="let session of sessions" class="session-entry">{{ session.sessionId }}</div>
   </div>
-
-  <table>
-    <tr>
-      <th>Sessions</th>
-      <th>Roster</th>
-    </tr>
-    <tr>
-      <td>
-        <ul>
-          <li *ngFor="let session of sessions">{{ session.sessionId }}</li>
-        </ul>
-      </td>
-    </tr>
-  </table>
+  <div class="roster-section">
+    <div class="roster-header">Roster</div>
+    <div class="roster-entry">TBD</div>
+  </div>
 </main>

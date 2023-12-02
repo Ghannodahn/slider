@@ -1,9 +1,10 @@
-body {
+main {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .session-section {
   width: 200px;
+  float: left;
 }
 
 .session-header {
@@ -18,6 +19,7 @@ body {
 
 .roster-section {
   width: 200px;
+  float: left;
 }
 
 .roster-header {
