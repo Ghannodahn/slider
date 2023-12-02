@@ -9,15 +9,16 @@ import { PerformersService } from '../performers/performers.service';
 })
 export class SessionManagerStateService {
   sessions: Session[] = [];
-  Performer: Performer[] = [];
-  isPerformerLoading: boolean = false;
-
   selectedSession: Session = EmptySession;
+  isSessionLoading: boolean = false;
+
+  Performer: Performer[] = [];
   selectedPerformer: Performer = EmptyPerformer;
+  isPerformerLoading: boolean = false;
 
   constructor(
     private sessionsService: SessionsService,
-    private PerformersService: PerformersService
+    private performersService: PerformersService
   ) {}
   
   public refreshSessions() {
@@ -30,7 +31,7 @@ export class SessionManagerStateService {
 
     this.isPerformerLoading = true;
 
-    this.PerformersService.listPerformer(this.selectedSession.sessionId)
+    this.performersService.listPerformer(this.selectedSession.sessionId)
       .subscribe(Performer => {    
         this.isPerformerLoading = false;
         this.Performer = Performer;
