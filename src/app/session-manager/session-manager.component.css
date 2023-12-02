@@ -17,6 +17,15 @@ main {
   padding: 8px;
 }
 
+.session-entry:hover:not(.session-selected) {
+  background-color: honeydew;
+  cursor: pointer;
+}
+
+.session-selected {
+  font-weight: bold;
+  background-color: dodgerblue;
+}
 .roster-section {
   width: 200px;
   float: left;

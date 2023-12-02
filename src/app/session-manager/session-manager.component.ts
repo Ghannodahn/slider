@@ -12,5 +12,13 @@ export class SessionManagerComponent {
   sessions = [
     {sessionId: 1},
     {sessionId: 2}
-  ]
+  ];
+
+  selectedSession = this.sessions[0];
+
+  onClickSession(session: any) {
+    this.selectedSession = session;
+  }
+
+  
 }

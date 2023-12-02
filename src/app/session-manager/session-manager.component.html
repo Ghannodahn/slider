@@ -1,7 +1,11 @@
 <main>
   <div class="session-section">
     <div class="session-header">Sessions</div>
-    <div *ngFor="let session of sessions" class="session-entry">{{ session.sessionId }}</div>
+    <div 
+    *ngFor="let session of sessions" 
+    class="session-entry"
+    [class.session-selected]="selectedSession === session"
+    (click)="onClickSession(session)">{{ session.sessionId }}</div>
   </div>
   <div class="roster-section">
     <div class="roster-header">Roster</div>
