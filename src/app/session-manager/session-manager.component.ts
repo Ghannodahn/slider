@@ -2,9 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { DatePipe } from '@angular/common';
 
-import { Session } from '../sessions/session';
+import { Session, EmptySession } from '../sessions/session';
 import { SessionsService } from '../sessions/sessions.service';
-import { Roster } from '../rosters/roster';
+import { Roster, EmptyRoster } from '../rosters/roster';
 import { RostersService } from '../rosters/rosters.service';
 
 @Component({
@@ -18,7 +18,8 @@ export class SessionManagerComponent {
   sessions: Session[] = [];
   roster: Roster[] = [];
 
-  selectedSession = this.sessions[0];
+  selectedSession: Session = EmptySession;
+  selectedPerformer: Roster = EmptyRoster;
 
   constructor(
     private sessionsService: SessionsService,
@@ -33,12 +34,18 @@ export class SessionManagerComponent {
     this.getRoster();
   }
 
+  onClickRoster(performer: Roster) {
+    this.selectedPerformer = performer;
+  }
+
   private getSessions() {
     this.sessionsService.listSessions()
       .subscribe(sessions => this.sessions = sessions)
   }
 
   private getRoster() {
+    if (!this.selectedSession) { return; }
+
     this.rostersService.listRoster(this.selectedSession.sessionId)
       .subscribe(roster => this.roster = roster)
   }

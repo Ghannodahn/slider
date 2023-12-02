@@ -7,11 +7,15 @@ class EventSession:
     self.db = db
 
   def list(self):
+    sql = """
+      SELECT 
+        sessionId, startTime, endTime, currentPos
+      FROM 
+        EventSession
+    """
     with self.db.connect() as conn:
       rows = conn.execute(
-              sqlalchemy.text(
-                  "SELECT * FROM EventSession"
-              )
+              sqlalchemy.text(sql)
           ).fetchall()
     
     result = []

@@ -2,15 +2,35 @@
   <div class="session-section">
     <div class="session-header">Sessions</div>
     <div 
-    *ngFor="let session of sessions" 
-    class="session-entry"
-    [class.session-selected]="selectedSession === session"
-    (click)="onClickSession(session)">{{ session.startTime | date:'y-MM-dd' }}</div>
+      *ngFor="let session of sessions" 
+      class="session-entry"
+      [class.session-selected]="selectedSession === session"
+      (click)="onClickSession(session)">
+      {{ session.startTime | date:'y-MM-dd' }}</div>
   </div>
   <div class="roster-section">
     <div class="roster-header">Roster</div>
     <div 
       class="roster-entry"
-      *ngFor="let performer of roster">{{ performer.displayName }}</div>
+      *ngFor="let performer of roster"
+      [class.roster-selected]="selectedPerformer === performer"
+      (click)="onClickRoster(performer)">
+      <div>{{ performer.displayName }}</div>
+      <div *ngIf="selectedPerformer === performer">
+        <div 
+          *ngIf="selectedPerformer.socialIg"
+          class="roster-attribute">
+          &#64;{{ performer.socialIg }}
+        </div>
+        <div 
+          *ngIf="selectedPerformer.link"
+          class="roster-attribute">
+          <a 
+            [href]="selectedPerformer.link"
+            target="_blank">
+            {{ performer.link }}</a>
+        </div>
+      </div>
+    </div>
   </div>
 </main>

@@ -17,6 +17,12 @@ main {
   padding: 8px;
 }
 
+
+.session-entry:hover {
+  background-color: honeydew;
+  cursor: pointer;
+}
+
 .session-entry:hover:not(.session-selected) {
   background-color: honeydew;
   cursor: pointer;
@@ -39,4 +45,19 @@ main {
 
 .roster-entry {
   padding: 8px;
+}
+
+.roster-entry:hover:not(.roster-selected) {
+  background-color: honeydew;
+  cursor: pointer;
+}
+
+.roster-attribute {
+  padding-top: 8px;
+  font-weight: normal;
+}
+
+.roster-selected {
+  font-weight: bold;
+  background-color: plum;
 }

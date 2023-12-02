@@ -16,11 +16,25 @@ CREATE TABLE Roster (
   rosterId    SERIAL PRIMARY KEY,
   sessionId   SERIAL,
   displayName VARCHAR(50),
-  sessionPos  INTEGER
+  socialIg    VARCHAR(50),
+  link        VARCHAR(50),
+  sessionPos  INTEGER,
+  isActive    BOOLEAN DEFAULT FALSE,
+  isComplete  BOOLEAN DEFAULT FALSE
 );
 
-INSERT INTO Roster (sessionId, displayName, sessionPos) VALUES (1, 'David McReynolds', 1);
-INSERT INTO Roster (sessionId, displayName, sessionPos) VALUES (1, 'No Repeat Miro', 3);
-INSERT INTO Roster (sessionId, displayName, sessionPos) VALUES (1, 'Greener Mind', 2);
-INSERT INTO Roster (sessionId, displayName, sessionPos) VALUES (1, 'Joe Allan Muharsky', 5);
-INSERT INTO Roster (sessionId, displayName, sessionPos) VALUES (1, 'Heather Wonders', 4);
+INSERT INTO 
+  Roster (sessionId, displayName, sessionPos) 
+  VALUES (1, 'David McReynolds', 1);
+INSERT INTO 
+  Roster (sessionId, displayName, sessionPos) 
+  VALUES (1, 'No Repeat Miro', 3);
+INSERT INTO 
+  Roster (sessionId, displayName, sessionPos) 
+  VALUES (1, 'Greener Mind', 2);
+INSERT INTO 
+  Roster (sessionId, displayName, socialIg, link, sessionPos) 
+  VALUES (1, 'Joe Allan Muharsky', 'bassicNerd', 'bassicnerd.com', 5);
+INSERT INTO 
+  Roster (sessionId, displayName, sessionPos) 
+  VALUES (1, 'Heather Wonders', 4);
