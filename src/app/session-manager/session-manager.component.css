@@ -2,35 +2,35 @@ main {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-.roster-section {
+.Performer-section {
   width: 200px;
   float: left;
 }
 
-.roster-header {
+.Performer-header {
   padding: 8px;
   color: white;
   background-color: indigo;
 }
 
-.roster-entry {
+.Performer-entry {
   padding: 8px;
 }
 
-.roster-entry:hover {
+.Performer-entry:hover {
   cursor: pointer;
 }
 
-.roster-entry:hover:not(.roster-selected) {
+.Performer-entry:hover:not(.Performer-selected) {
   background-color: honeydew;
 }
 
-.roster-attribute {
+.Performer-attribute {
   padding-top: 8px;
   font-weight: normal;
 }
 
-.roster-selected {
+.Performer-selected {
   font-weight: bold;
   background-color: plum;
 }

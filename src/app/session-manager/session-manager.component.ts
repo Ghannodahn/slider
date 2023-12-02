@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { DatePipe } from '@angular/common';
 
 import { SessionPanelComponent } from '../sessions/session-panel/session-panel.component';
-import { Roster, EmptyRoster } from '../rosters/roster';
+import { Performer, EmptyPerformer } from '../performers/performer';
 import { SessionManagerStateService } from './session-manager-state.service';
 import { LoadingPanelEntryComponent } from '../loading-panel-entry/loading-panel-entry.component';
 
@@ -23,9 +23,9 @@ export class SessionManagerComponent {
   constructor(
     public stateService: SessionManagerStateService) {}
 
-  onClickRoster(performer: Roster) {
+  onClickPerformer(performer: Performer) {
     if (this.stateService.selectedPerformer === performer) {
-      this.stateService.selectedPerformer = EmptyRoster;
+      this.stateService.selectedPerformer = EmptyPerformer;
     } else {
       this.stateService.selectedPerformer = performer;
     }

@@ -11,9 +11,9 @@ INSERT INTO EventSession (startTime, endTime, currentPos)
 INSERT INTO EventSession (startTime, endTime, currentPos) 
                   VALUES ('2023-11-26 7:00 PM', '2023-11-26 11:30 PM', 1);
 
-DROP TABLE IF EXISTS Roster;
-CREATE TABLE Roster (
-  rosterId    SERIAL PRIMARY KEY,
+DROP TABLE IF EXISTS performer;
+CREATE TABLE performer (
+  performerId    SERIAL PRIMARY KEY,
   sessionId   SERIAL,
   displayName VARCHAR(50),
   socialIg    VARCHAR(50),
@@ -24,35 +24,34 @@ CREATE TABLE Roster (
 );
 
 INSERT INTO 
-  Roster (sessionId, displayName, sessionPos) 
+  performer (sessionId, displayName, sessionPos) 
   VALUES (1, 'David McReynolds', 1);
 INSERT INTO 
-  Roster (sessionId, displayName, sessionPos) 
+  performer (sessionId, displayName, sessionPos) 
   VALUES (1, 'No Repeat Miro', 3);
 INSERT INTO 
-  Roster (sessionId, displayName, sessionPos) 
+  performer (sessionId, displayName, sessionPos) 
   VALUES (1, 'Greener Mind', 2);
 INSERT INTO 
-  Roster (sessionId, displayName, socialIg, link, sessionPos) 
+  performer (sessionId, displayName, socialIg, link, sessionPos) 
   VALUES (1, 'Joe Allan Muharsky', 'bassicNerd', 'bassicnerd.com', 5);
 INSERT INTO 
-  Roster (sessionId, displayName, sessionPos) 
+  performer (sessionId, displayName, sessionPos) 
   VALUES (1, 'Heather Wonders', 4);
 
 
-
 INSERT INTO 
-  Roster (sessionId, displayName, sessionPos) 
+  performer (sessionId, displayName, sessionPos) 
   VALUES (2, 'David McReynolds', 2);
 INSERT INTO 
-  Roster (sessionId, displayName, sessionPos) 
+  performer (sessionId, displayName, sessionPos) 
   VALUES (2, 'No Repeat Miro', 3);
 INSERT INTO 
-  Roster (sessionId, displayName, sessionPos) 
+  performer (sessionId, displayName, sessionPos) 
   VALUES (2, 'Javier', 4);
 INSERT INTO 
-  Roster (sessionId, displayName, socialIg, link, sessionPos) 
+  performer (sessionId, displayName, socialIg, link, sessionPos) 
   VALUES (2, 'Joe Allan Muharsky', 'bassicNerd', 'bassicnerd.com', 1);
 INSERT INTO 
-  Roster (sessionId, displayName, sessionPos) 
+  performer (sessionId, displayName, sessionPos) 
   VALUES (2, 'Andrew Lee Mason', 5);

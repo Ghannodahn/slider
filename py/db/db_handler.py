@@ -1,5 +1,5 @@
 from py.db.event_session import EventSession
-from py.db.roster import Roster
+from py.db.performer import Performer
 from py.db.db_connector import CloudSqlConnector
 
 import sqlalchemy
@@ -14,9 +14,9 @@ class DbHandler:
   def handle_request(self, entity, args=None):
     if entity == "session":
       rtn = EventSession(self.db).list()
-    elif entity == "roster":
+    elif entity == "performer":
       sessionId = args.get("sessionId")
-      rtn = Roster(self.db).list(sessionId)
+      rtn = Performer(self.db).list(sessionId)
     else:
       raise Exception("Request failed: Entity {0} does not exist.".format(entity))
     

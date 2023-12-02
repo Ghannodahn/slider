@@ -2,16 +2,16 @@ import sqlalchemy
 
 from py.db import db_connector
 
-class Roster:
+class Performer:
   def __init__(self, db):
     self.db = db
 
   def list(self, sessionId):
     sql = """
       SELECT
-        rosterId, sessionId, displayName, link, socialIg, sessionPos
+        performerId, sessionId, displayName, link, socialIg, sessionPos
       FROM
-        Roster
+        performer
       WHERE
         sessionId = {0}
       ORDER BY
@@ -27,7 +27,7 @@ class Roster:
 
     for row in rows:
       result.append({
-        "rosterId": row[0], 
+        "PerformerId": row[0], 
         "sessionId": row[1], 
         "displayName": row[2], 
         "link": row[3],

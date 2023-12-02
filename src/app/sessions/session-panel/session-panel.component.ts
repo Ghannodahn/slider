@@ -28,11 +28,11 @@ export class SessionPanelComponent {
   onClickSession(session: Session) {
     if (this.stateService.selectedSession === session) {
       this.stateService.selectedSession = EmptySession;
-      this.stateService.roster = [];
+      this.stateService.Performer = [];
     } else {
       this.stateService.selectedSession = session;
-      this.stateService.roster = [];
-      this.stateService.refreshRoster();
+      this.stateService.Performer = [];
+      this.stateService.refreshPerformer();
     }
   }
 }

@@ -1,23 +1,23 @@
 import { Injectable } from '@angular/core';
 import { Session, EmptySession } from '../sessions/session';
-import { Roster, EmptyRoster } from '../rosters/roster'
+import { Performer, EmptyPerformer } from '../performers/performer'
 import { SessionsService } from '../sessions/sessions.service';
-import { RostersService } from '../rosters/rosters.service';
+import { PerformersService } from '../performers/performers.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SessionManagerStateService {
   sessions: Session[] = [];
-  roster: Roster[] = [];
-  isRosterLoading: boolean = false;
+  Performer: Performer[] = [];
+  isPerformerLoading: boolean = false;
 
   selectedSession: Session = EmptySession;
-  selectedPerformer: Roster = EmptyRoster;
+  selectedPerformer: Performer = EmptyPerformer;
 
   constructor(
     private sessionsService: SessionsService,
-    private rostersService: RostersService
+    private PerformersService: PerformersService
   ) {}
   
   public refreshSessions() {
@@ -25,15 +25,15 @@ export class SessionManagerStateService {
       .subscribe(sessions => this.sessions = sessions)
   }
   
-  public refreshRoster() {
+  public refreshPerformer() {
     if (!this.selectedSession) { return; }
 
-    this.isRosterLoading = true;
+    this.isPerformerLoading = true;
 
-    this.rostersService.listRoster(this.selectedSession.sessionId)
-      .subscribe(roster => {    
-        this.isRosterLoading = false;
-        this.roster = roster;
+    this.PerformersService.listPerformer(this.selectedSession.sessionId)
+      .subscribe(Performer => {    
+        this.isPerformerLoading = false;
+        this.Performer = Performer;
       });
   }
 }

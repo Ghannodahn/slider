@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { RostersService } from './rosters.service';
+import { PerformersService } from './performers.service';
 
 describe('SessionsService', () => {
-  let service: RostersService;
+  let service: PerformersService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(RostersService);
+    service = TestBed.inject(PerformersService);
   });
 
   it('should be created', () => {

@@ -4,7 +4,7 @@ import { HttpHeaders } from '@angular/common/http';
 
 import { Observable, catchError, map } from 'rxjs';
 
-import { Roster } from './roster';
+import { Performer } from './performer';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -15,12 +15,12 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class RostersService {
+export class PerformersService {
   constructor(private http: HttpClient) { }
 
-  listRoster(sessionId: number): Observable<Roster[]> {
-    console.log("listRoster executing");
-    var listUrl = "data/roster?sessionId=" + sessionId;
-    return this.http.get<Roster[]>(listUrl);
+  listPerformer(sessionId: number): Observable<Performer[]> {
+    console.log("listPerformer executing");
+    var listUrl = "data/performer?sessionId=" + sessionId;
+    return this.http.get<Performer[]>(listUrl);
   }
 }

@@ -1,7 +1,5 @@
-import { Time } from "@angular/common";
-
-export interface Roster {
-  rosterId: number;
+export interface Performer {
+  PerformerId: number;
   sessionId: number;
   displayName: string;
   link: string;
@@ -9,8 +7,8 @@ export interface Roster {
   sessionPos: number;
 }
 
-export var EmptyRoster: Roster = {
-  rosterId: 0,
+export var EmptyPerformer: Performer = {
+  PerformerId: 0,
   sessionId: 0,
   displayName: "",
   link: "",
