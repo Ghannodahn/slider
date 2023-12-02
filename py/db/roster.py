@@ -14,6 +14,8 @@ class Roster:
         Roster
       WHERE
         sessionId = {0}
+      ORDER BY
+        sessionPos
     """.format(sessionId)
 
     with self.db.connect() as conn:

@@ -20,7 +20,7 @@ export class RostersService {
 
   listRoster(sessionId: number): Observable<Roster[]> {
     console.log("listRoster executing");
-    var listUrl = "data/roster?sessionId=" + sessionId
+    var listUrl = "data/roster?sessionId=" + sessionId;
     return this.http.get<Roster[]>(listUrl);
   }
 }

@@ -17,6 +17,7 @@ import { RostersService } from '../rosters/rosters.service';
 export class SessionManagerComponent {
   sessions: Session[] = [];
   roster: Roster[] = [];
+  isRosterLoading: boolean = false;
 
   selectedSession: Session = EmptySession;
   selectedPerformer: Roster = EmptyRoster;
@@ -29,13 +30,23 @@ export class SessionManagerComponent {
     this.getSessions();
   }
 
-  onClickSession(session: any) {
-    this.selectedSession = session;
-    this.getRoster();
+  onClickSession(session: Session) {
+    if (this.selectedSession === session) {
+      this.selectedSession = EmptySession;
+      this.roster = [];
+    } else {
+      this.selectedSession = session;
+      this.roster = [];
+      this.getRoster();
+    }
   }
 
   onClickRoster(performer: Roster) {
-    this.selectedPerformer = performer;
+    if (this.selectedPerformer === performer) {
+      this.selectedPerformer = EmptyRoster;
+    } else {
+      this.selectedPerformer = performer;
+    }
   }
 
   private getSessions() {
@@ -46,7 +57,12 @@ export class SessionManagerComponent {
   private getRoster() {
     if (!this.selectedSession) { return; }
 
+    this.isRosterLoading = true;
+
     this.rostersService.listRoster(this.selectedSession.sessionId)
-      .subscribe(roster => this.roster = roster)
+      .subscribe(roster => {    
+        this.isRosterLoading = false;
+        this.roster = roster;
+      });
   }
 }

@@ -38,3 +38,21 @@ INSERT INTO
 INSERT INTO 
   Roster (sessionId, displayName, sessionPos) 
   VALUES (1, 'Heather Wonders', 4);
+
+
+
+INSERT INTO 
+  Roster (sessionId, displayName, sessionPos) 
+  VALUES (2, 'David McReynolds', 2);
+INSERT INTO 
+  Roster (sessionId, displayName, sessionPos) 
+  VALUES (2, 'No Repeat Miro', 3);
+INSERT INTO 
+  Roster (sessionId, displayName, sessionPos) 
+  VALUES (2, 'Javier', 4);
+INSERT INTO 
+  Roster (sessionId, displayName, socialIg, link, sessionPos) 
+  VALUES (2, 'Joe Allan Muharsky', 'bassicNerd', 'bassicnerd.com', 1);
+INSERT INTO 
+  Roster (sessionId, displayName, sessionPos) 
+  VALUES (2, 'Andrew Lee Mason', 5);

@@ -6,7 +6,6 @@ app = Flask(__name__, template_folder="static")
 
 @app.route("/data/<entity>")
 def data_connect(entity):
-  #return entity
   args = request.args
   return db_handler.DbHandler().handle_request(entity, args)
 
