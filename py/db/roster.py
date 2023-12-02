@@ -2,7 +2,7 @@ import sqlalchemy
 
 from py.db import db_connector
 
-class EventSession:
+class Roster:
   def __init__(self, db):
     self.db = db
 
@@ -10,14 +10,14 @@ class EventSession:
     with self.db.connect() as conn:
       rows = conn.execute(
               sqlalchemy.text(
-                  "SELECT * FROM EventSession"
+                  "SELECT * FROM Roster"
               )
           ).fetchall()
     
     result = {}
 
     for row in rows:
-      result[row[0]] = {"sessionId": row[0], "startTime": row[1], "endTime": row[2], "currentPos": row[3]}
+      result[row[0]] = {"rosterId": row[0], "sessionId": row[1], "displayName": row[2], "sessionPos": row[3]}
 
     # For the sake of example, use static information to inflate the template.
     # This will be replaced with real information in later steps.
