@@ -31,3 +31,16 @@
   font-weight: bold;
   background-color: plum;
 }
+
+.performer-add-button {
+  background-color: bisque;
+  border: 2px solid darksalmon;
+  font-weight: bold;
+  padding: 6px;
+  text-align: center;
+}
+
+.performer-add-button:hover {
+  background-color: darksalmon;
+  cursor: pointer;
+}

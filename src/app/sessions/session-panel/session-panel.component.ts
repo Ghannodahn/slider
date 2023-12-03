@@ -34,7 +34,7 @@ export class SessionPanelComponent {
     } else {
       this.stateService.selectedSession = session;
       this.stateService.performers = [];
-      this.stateService.refreshPerformer();
+      this.stateService.refreshPerformers();
     }
   }
 }

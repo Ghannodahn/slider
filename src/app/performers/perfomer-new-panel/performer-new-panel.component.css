@@ -1,0 +1,24 @@
+.performer-new-panel {
+  padding: 8px;
+  background-color: plum;
+}
+
+div.input-row {
+  padding-bottom: 8px;
+  width: 100%;
+}
+
+input {
+  border: 0;
+  display: block;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 1.0em;
+  padding: 4px;
+  width: -webkit-fill-available;
+}
+
+label {
+  display: block;
+  padding: 4px;
+  font-size: 0.8em;
+}

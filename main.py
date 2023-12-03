@@ -7,12 +7,22 @@ app = Flask(__name__, template_folder="static")
 
 @app.route("/data/<entity>")
 def data_connect(entity):
-  args = request.args
+  args = request.args.to_dict()
   return db_handler.DbHandler().handle_request(entity, "list", args)
 
-@app.route("/data/<entity>/<operation>")
-def data_connect_op(entity, operation):
-  args = request.args
+@app.route("/data/<entity>/<operation>", methods=["GET"])
+def data_connect_op_get(entity, operation):
+  args = request.args.to_dict()
+  result = db_handler.DbHandler().handle_request(entity, operation, args)
+
+  if result:
+     return result
+  else:
+     return {"status": "Succeeded"}
+
+@app.route("/data/<entity>/<operation>", methods=["PUT"])
+def data_connect_op_put(entity, operation):
+  args = request.get_json()["params"]
   result = db_handler.DbHandler().handle_request(entity, operation, args)
 
   if result:

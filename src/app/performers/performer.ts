@@ -1,5 +1,5 @@
 export interface Performer {
-  PerformerId: number;
+  performerId: number;
   sessionId: number;
   displayName: string;
   link: string;
@@ -7,13 +7,16 @@ export interface Performer {
   sessionPos: number;
 }
 
-export var EmptyPerformer: Performer = {
-  PerformerId: 0,
-  sessionId: 0,
-  displayName: "",
-  link: "",
-  socialIg: "",
-  sessionPos: 0
-}
+export var EmptyPerformer: Performer = newPerformer();
 
-  
+export function newPerformer() {
+  return {
+    performerId: 0,
+    sessionId: 0,
+    displayName: "EMPTY",
+    link: "",
+    socialIg: "",
+    sessionPos: 0
+  }
+}
+ 

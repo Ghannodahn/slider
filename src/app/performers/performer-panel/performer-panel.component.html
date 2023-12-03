@@ -24,4 +24,12 @@
       </div>
     </div>
   </div>
+  <div
+    class="performer-add-button"
+    *ngIf="stateService.isSessionSelected() && !isAdding && !stateService.isPerformerLoading"
+    (click)="onClickAddPerformer()">Add Performer...</div>
+  <slider-performer-new-panel
+    *ngIf="isAdding"
+    (submit)="onClickSubmitPerformer()">
+  </slider-performer-new-panel>
 </div>

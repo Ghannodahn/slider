@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Session, EmptySession } from '../sessions/session';
-import { Performer, EmptyPerformer } from '../performers/performer'
+import { Performer, EmptyPerformer, newPerformer } from '../performers/performer'
 import { SessionsService } from '../sessions/sessions.service';
 import { PerformersService } from '../performers/performers.service';
 
@@ -13,6 +13,7 @@ export class SessionManagerStateService {
   isSessionLoading: boolean = false;
 
   performers: Performer[] = [];
+  dirtyPerformer: Performer = newPerformer();
   selectedPerformer: Performer = EmptyPerformer;
   isPerformerLoading: boolean = false;
 
@@ -31,7 +32,23 @@ export class SessionManagerStateService {
       });
   }
   
-  public refreshPerformer() {
+  public isSessionSelected() : boolean {
+    return (this.selectedSession !== EmptySession);
+  }
+
+  public getNextSessionPos() : number {
+    var lastPos = -1;
+
+    this.performers.forEach(function(performer) {
+      if (performer.sessionPos > lastPos) {
+        lastPos = performer.sessionPos;
+      }
+    });
+
+    return ++lastPos;
+  }
+
+  public refreshPerformers() {
     if (!this.selectedSession) { return; }
 
     this.isPerformerLoading = true;
@@ -40,6 +57,16 @@ export class SessionManagerStateService {
       .subscribe(performer => {    
         this.isPerformerLoading = false;
         this.performers = performer;
+      });
+  }
+
+  public addPerformer() {
+    this.isPerformerLoading = true;
+
+    this.performersService.addPerformer(this.dirtyPerformer)
+      .subscribe(() => {
+        this.dirtyPerformer = newPerformer();
+        this.refreshPerformers();
       });
   }
 }

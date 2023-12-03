@@ -12,8 +12,8 @@ def init_connection_pool() -> sqlalchemy.engine.base.Engine:
 
 class DbHandler:
   def __init__(self):
-    root = logging.getLogger()
-    root.addHandler(default_handler)
+    self.log = logging.getLogger()
+    self.log.addHandler(default_handler)
     
     self.db = init_connection_pool()
 
@@ -26,13 +26,10 @@ class DbHandler:
       raise Exception("Request failed: Operation {0} is unsupported.".format(operation))
 
   def handle_list_request(self, entity, args=None):
-    text = "Initializing DbHandler"
-    logging.warning(text)
-    
     if entity == "session":
       rtn = EventSession(self.db).list()
     elif entity == "performer":
-      sessionId = args.get("sessionId")
+      sessionId = args["sessionId"]
       rtn = Performer(self.db).list(sessionId)
     else:
       raise Exception("Request failed: Entity {0} does not exist.".format(entity))
@@ -41,15 +38,24 @@ class DbHandler:
     
   def handle_create_request(self, entity, args):
     if entity == "session":
-      startTime = args.get("startTime")
-      endTime = args.get("endTime")
+      startTime = args["startTime"]
+      endTime = args["endTime"]
 
       EventSession(self.db).create(startTime, endTime)
     elif entity == "performer":
-      sessionId = args.get("sessionId")
-      displayName = args.get("displayName")
-      sessionPos = args.get("sessionPos")
+      self.log.warning("*** ARGS:")
+      self.log.warning(args)
+      self.log.warning("*** END ARGS")
 
-      Performer(self.db).create(sessionId, displayName, sessionPos)
+      sessionId = args["sessionId"]
+      displayName = args["displayName"]
+      sessionPos = args["sessionPos"]
+      link = args["link"]
+      socialIg = args["socialIg"]
+
+      try:
+        Performer(self.db).create(sessionId, displayName, sessionPos, link, socialIg)
+      except Exception as err:
+        logging.error("handle_create_request failed")
     else:
       raise Exception("Request failed: Entity {0} does not exist.".format(entity))

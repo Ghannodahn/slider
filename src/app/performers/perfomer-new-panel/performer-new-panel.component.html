@@ -1,0 +1,18 @@
+<div
+  class="performer-new-panel">
+  <div class="input-row">
+    <input type="text" [(ngModel)]="displayName" #ctrl="ngModel">
+    <label>Display Name</label>
+  </div>
+  <div class="input-row">
+    <input type="text" [(ngModel)]="link" #ctrl="ngModel">
+    <label>Website or Primary Link</label>
+  </div>
+  <div class="input-row">
+    <input type="text" [(ngModel)]="socialIg" #ctrl="ngModel">
+    <label>Instagram</label>
+  </div>
+  <div>
+    <button (click)="onClickSubmit()">Save</button>
+  </div>
+</div>

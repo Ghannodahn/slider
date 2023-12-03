@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
 
 import { SessionManagerComponent } from './session-manager/session-manager.component';
@@ -9,6 +10,7 @@ import { SessionManagerComponent } from './session-manager/session-manager.compo
   standalone: true,
   imports: [
     CommonModule, 
+    FormsModule,
     RouterOutlet,
     SessionManagerComponent
   ],
