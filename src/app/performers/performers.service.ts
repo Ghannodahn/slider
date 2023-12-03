@@ -18,8 +18,8 @@ const httpOptions = {
 export class PerformersService {
   constructor(private http: HttpClient) { }
 
-  listPerformer(sessionId: number): Observable<Performer[]> {
-    console.log("listPerformer executing");
+  listPerformers(sessionId: number): Observable<Performer[]> {
+    console.log("listPerformers executing");
     var listUrl = "data/performer?sessionId=" + sessionId;
     return this.http.get<Performer[]>(listUrl);
   }

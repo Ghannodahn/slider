@@ -1,0 +1,33 @@
+
+.performer-section {
+  width: 200px;
+  float: left;
+}
+
+.performer-header {
+  padding: 8px;
+  color: white;
+  background-color: indigo;
+}
+
+.performer-entry {
+  padding: 8px;
+}
+
+.performer-entry:hover {
+  cursor: pointer;
+}
+
+.performer-entry:hover:not(.performer-selected) {
+  background-color: honeydew;
+}
+
+.performer-attribute {
+  padding-top: 8px;
+  font-weight: normal;
+}
+
+.performer-selected {
+  font-weight: bold;
+  background-color: plum;
+}

@@ -12,7 +12,7 @@ export class SessionManagerStateService {
   selectedSession: Session = EmptySession;
   isSessionLoading: boolean = false;
 
-  Performer: Performer[] = [];
+  performers: Performer[] = [];
   selectedPerformer: Performer = EmptyPerformer;
   isPerformerLoading: boolean = false;
 
@@ -36,10 +36,10 @@ export class SessionManagerStateService {
 
     this.isPerformerLoading = true;
 
-    this.performersService.listPerformer(this.selectedSession.sessionId)
+    this.performersService.listPerformers(this.selectedSession.sessionId)
       .subscribe(performer => {    
         this.isPerformerLoading = false;
-        this.Performer = performer;
+        this.performers = performer;
       });
   }
 }

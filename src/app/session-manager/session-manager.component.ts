@@ -3,9 +3,9 @@ import { Component } from '@angular/core';
 import { DatePipe } from '@angular/common';
 
 import { SessionPanelComponent } from '../sessions/session-panel/session-panel.component';
-import { Performer, EmptyPerformer } from '../performers/performer';
+import { PerformerPanelComponent } from '../performers/performer-panel/performer-panel.component';
+
 import { SessionManagerStateService } from './session-manager-state.service';
-import { LoadingPanelEntryComponent } from '../loading-panel-entry/loading-panel-entry.component';
 
 @Component({
   selector: 'slider-session-manager',
@@ -14,7 +14,7 @@ import { LoadingPanelEntryComponent } from '../loading-panel-entry/loading-panel
     CommonModule, 
     DatePipe,
     SessionPanelComponent,
-    LoadingPanelEntryComponent,
+    PerformerPanelComponent,
   ],
   templateUrl: './session-manager.component.html',
   styleUrl: './session-manager.component.css'
@@ -22,14 +22,6 @@ import { LoadingPanelEntryComponent } from '../loading-panel-entry/loading-panel
 export class SessionManagerComponent {
   constructor(
     public stateService: SessionManagerStateService) {}
-
-  onClickPerformer(performer: Performer) {
-    if (this.stateService.selectedPerformer === performer) {
-      this.stateService.selectedPerformer = EmptyPerformer;
-    } else {
-      this.stateService.selectedPerformer = performer;
-    }
-  }
 
   ngOnInit() {
     this.stateService.refreshSessions();

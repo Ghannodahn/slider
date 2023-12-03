@@ -1,0 +1,27 @@
+<div class="performer-section">
+  <div class="performer-header">Performer</div>
+  <slider-loading-panel-entry
+    *ngIf="stateService.isPerformerLoading"></slider-loading-panel-entry>
+  <div 
+    class="performer-entry"
+    *ngFor="let performer of stateService.performers"
+    [class.performer-selected]="stateService.selectedPerformer === performer"
+    (click)="onClickPerformer(performer)">
+    <div>{{ performer.displayName }}</div>
+    <div *ngIf="stateService.selectedPerformer === performer">
+      <div 
+        *ngIf="stateService.selectedPerformer.socialIg"
+        class="performer-attribute">
+        &#64;{{ performer.socialIg }}
+      </div>
+      <div 
+        *ngIf="stateService.selectedPerformer.link"
+        class="performer-attribute">
+        <a 
+          [href]="stateService.selectedPerformer.link"
+          target="_blank">
+          {{ performer.link }}</a>
+      </div>
+    </div>
+  </div>
+</div>

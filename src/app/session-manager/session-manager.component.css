@@ -1,36 +1,3 @@
 main {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-
-.Performer-section {
-  width: 200px;
-  float: left;
-}
-
-.Performer-header {
-  padding: 8px;
-  color: white;
-  background-color: indigo;
-}
-
-.Performer-entry {
-  padding: 8px;
-}
-
-.Performer-entry:hover {
-  cursor: pointer;
-}
-
-.Performer-entry:hover:not(.Performer-selected) {
-  background-color: honeydew;
-}
-
-.Performer-attribute {
-  padding-top: 8px;
-  font-weight: normal;
-}
-
-.Performer-selected {
-  font-weight: bold;
-  background-color: plum;
-}

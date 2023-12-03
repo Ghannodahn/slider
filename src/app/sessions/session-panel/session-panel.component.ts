@@ -30,10 +30,10 @@ export class SessionPanelComponent {
   onClickSession(session: Session) {
     if (this.stateService.selectedSession === session) {
       this.stateService.selectedSession = EmptySession;
-      this.stateService.Performer = [];
+      this.stateService.performers = [];
     } else {
       this.stateService.selectedSession = session;
-      this.stateService.Performer = [];
+      this.stateService.performers = [];
       this.stateService.refreshPerformer();
     }
   }
