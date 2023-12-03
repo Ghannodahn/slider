@@ -1,5 +1,6 @@
 from py.db import db_handler
 from flask import Flask, render_template, request, Response
+import logging
 import re
 
 app = Flask(__name__, template_folder="static")
@@ -7,26 +8,46 @@ app = Flask(__name__, template_folder="static")
 @app.route("/data/<entity>")
 def data_connect(entity):
   args = request.args
-  return db_handler.DbHandler().handle_request(entity, args)
+  return db_handler.DbHandler().handle_request(entity, "list", args)
+
+@app.route("/data/<entity>/<operation>")
+def data_connect_op(entity, operation):
+  args = request.args
+  result = db_handler.DbHandler().handle_request(entity, operation, args)
+
+  if result:
+     return result
+  else:
+     return {"status": "Succeeded"}
 
 # Local Testing Only.
 @app.route("/<filename>")
 def show_file(filename):
-  file = open("static/browser/{0}".format(filename))
-  result = file.read()
-  file.close()
+  fullpath = "static/browser/{0}".format(filename)
 
   extension_re = re.search(".*\.(.*)", filename)
   if extension_re:
      extension = extension_re.group(1)
 
      if extension == "html":
+        file = open(fullpath, "r")
+        result = file.read()
         return Response(result, mimetype="text/html")
      elif extension == "js":
+        file = open(fullpath, "r")
+        result = file.read()
         return Response(result, mimetype="text/javascript")
      elif extension == "css":
+        file = open(fullpath, "r")
+        result = file.read()
         return Response(result, mimetype="text/css")
-        
+     elif extension == "ico":
+        file = open(fullpath, "rb")
+        result = file.read()
+        return Response(result, mimetype="image/x-icon")
+     else:
+        raise Exception("Extension {0} not supported.".format(extension))
+     
   return result
 
 # Local Testing Only.

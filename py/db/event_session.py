@@ -1,7 +1,5 @@
 import sqlalchemy
 
-from py.db import db_connector
-
 class EventSession:
   def __init__(self, db):
     self.db = db
