@@ -1,15 +1,15 @@
 <div
   class="performer-new-panel">
   <div class="input-row">
-    <input type="text" [(ngModel)]="displayName" #ctrl="ngModel">
+    <input type="text" [(ngModel)]="stateService.dirtyPerformer.displayName" #ctrl="ngModel">
     <label>Display Name</label>
   </div>
   <div class="input-row">
-    <input type="text" [(ngModel)]="link" #ctrl="ngModel">
+    <input type="text" [(ngModel)]="stateService.dirtyPerformer.link" #ctrl="ngModel">
     <label>Website or Primary Link</label>
   </div>
   <div class="input-row">
-    <input type="text" [(ngModel)]="socialIg" #ctrl="ngModel">
+    <input type="text" [(ngModel)]="stateService.dirtyPerformer.socialIg" #ctrl="ngModel">
     <label>Instagram</label>
   </div>
   <div>

@@ -1,4 +1,4 @@
-import { CommonModule, DatePipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { LoadingPanelEntryComponent } from '../../loading-panel-entry/loading-panel-entry.component';
 import { Performer, newPerformer } from '../performer';
@@ -10,8 +10,7 @@ import { PerformersService } from '../performers.service';
   selector: 'slider-performer-panel',
   standalone: true,
   imports: [
-    CommonModule, 
-    DatePipe,
+    CommonModule,
     LoadingPanelEntryComponent,
     PerformerNewPanelComponent,
   ],
