@@ -1,13 +1,13 @@
+.session-section {
+  height: -webkit-fill-available;
+  width: -webkit-fill-available;
+}
+
 .section-loading {
   padding: 8px;
   font-weight: bold;
   background-color: goldenrod;
   text-align: center;
-}
-
-.session-section {
-  width: 200px;
-  float: left;
 }
 
 .session-header {

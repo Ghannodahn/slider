@@ -1,3 +1,27 @@
-main {
+.canvas {
+  background-color: pink;
+  display: flex;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  height: -webkit-fill-available;
+  width: -webkit-fill-available;
+
+  /* FlexBox */
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.session-panel {
+  width: 200px;
+  height: -webkit-fill-available;
+}
+
+.performers-panel {
+  width: 300px;
+  height: -webkit-fill-available;
+}
+
+.performer-show-panel {
+  flex-grow: 1;
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
 }

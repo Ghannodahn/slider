@@ -4,7 +4,7 @@ import { DatePipe } from '@angular/common';
 
 import { SessionPanelComponent } from '../sessions/session-panel/session-panel.component';
 import { PerformerPanelComponent } from '../performers/performer-panel/performer-panel.component';
-
+import { PerformerShowPanelComponent } from '../performers/performer-show-panel/performer-show-panel.component';
 import { SessionManagerStateService } from './session-manager-state.service';
 
 @Component({
@@ -15,6 +15,7 @@ import { SessionManagerStateService } from './session-manager-state.service';
     DatePipe,
     SessionPanelComponent,
     PerformerPanelComponent,
+    PerformerShowPanelComponent
   ],
   templateUrl: './session-manager.component.html',
   styleUrl: './session-manager.component.css'

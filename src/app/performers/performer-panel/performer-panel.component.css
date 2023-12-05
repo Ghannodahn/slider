@@ -1,7 +1,7 @@
 
 .performer-section {
-  width: 200px;
-  float: left;
+  height: -webkit-fill-available;
+  width: -webkit-fill-available;
 }
 
 .performer-header {

@@ -1,0 +1,62 @@
+.canvas {
+  display: flex;
+  flex-flow: column;
+  height: -webkit-fill-available;
+  width: -webkit-fill-available;
+}
+
+.preview-header {
+  padding: 8px;
+  color: white;
+  background-color: navy;
+}
+
+.preview-footer {
+  padding: 8px;
+  color: white;
+  background-color: navy;
+}
+
+.preview-section {
+  height: -webkit-fill-available;
+  width: -webkit-fill-available;
+  background-color: black;
+  color: white;
+  flex-grow: 1;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+}
+
+.preview-section > div {
+  padding-top: 20px;
+  padding-bottom: 20px;  
+}
+
+.display-name {
+  font-size: 8em;
+  text-align: center;
+}
+
+.link {
+  font-size: 4em;
+  font-family:'Courier New', Courier, monospace;
+  text-align: center;
+}
+
+.social-link {
+  font-size: 4em;
+  font-family:'Courier New', Courier, monospace;
+  text-align: center;
+}
+
+.next {
+  font-size: 4em;
+  flex: grow;
+  text-align: center;
+  vertical-align: middle;
+  padding-top: 8px;
+  padding-bottom: 8px;  
+}

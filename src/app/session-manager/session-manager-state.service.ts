@@ -36,6 +36,10 @@ export class SessionManagerStateService {
     return (this.selectedSession !== EmptySession);
   }
 
+  public isPerformerSelected() : boolean {
+    return (this.selectedPerformer !== EmptyPerformer);
+  }
+
   public getNextSessionPos() : number {
     var lastPos = -1;
 

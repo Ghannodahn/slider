@@ -1,0 +1,19 @@
+<div class="canvas">
+  <div class="preview-header">Preview</div>
+  <div class="preview-section">
+    <div class="display-name">
+      {{ stateService.selectedPerformer.displayName }}
+    </div>
+    <div class="link" *ngIf="stateService.selectedPerformer.link">
+      URL: {{ stateService.selectedPerformer.link || "No Link" }}
+    </div>
+    <div class="social-link" *ngIf="stateService.selectedPerformer.socialIg">
+      IG: &#64;{{ stateService.selectedPerformer.socialIg || "UNDEFINED" }}
+    </div>
+  </div>
+  <div class="preview-footer">
+    <div class="next">
+      Next Up: TODO
+    </div>
+  </div>
+</div>
