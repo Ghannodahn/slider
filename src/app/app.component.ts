@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
 
 import { SessionManagerComponent } from './session-manager/session-manager.component';
+import { AppHeaderComponent } from './app-header/app-header.component';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,8 @@ import { SessionManagerComponent } from './session-manager/session-manager.compo
     CommonModule, 
     FormsModule,
     RouterOutlet,
-    SessionManagerComponent
+    SessionManagerComponent,
+    AppHeaderComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

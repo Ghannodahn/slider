@@ -1,13 +1,24 @@
 .canvas {
-  background-color: pink;
-  display: flex;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   height: -webkit-fill-available;
   width: -webkit-fill-available;
 
   /* FlexBox */
+  flex-grow: 1;
+  display: flex;
   flex-direction: row;
   align-items: flex-start;
+}
+
+.canvas > div {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  margin-left: 8px;
+  margin-right: 0px;
+}
+
+.canvas > div:last-child {
+  margin-right: 8px;
 }
 
 .session-panel {
@@ -24,4 +35,13 @@
   flex-grow: 1;
   width: -webkit-fill-available;
   height: -webkit-fill-available;
+
+  display: flex;
+  flex-direction: column;
+}
+
+slider-performer-show-panel {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
 }

@@ -1,0 +1,10 @@
+main {
+  height: -webkit-fill-available;
+  display: flex;
+  flex-direction: column;
+}
+
+slider-session-manager {
+  flex-grow: 1;
+  display: flex;
+}

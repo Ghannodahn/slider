@@ -6,8 +6,8 @@
 
 .performer-header {
   padding: 8px;
-  color: white;
-  background-color: indigo;
+  font-weight: bold;
+  border-bottom: 1px solid cornflowerblue;
 }
 
 .performer-entry {
@@ -19,7 +19,7 @@
 }
 
 .performer-entry:hover:not(.performer-selected) {
-  background-color: honeydew;
+  background-color: #cfe2f3;
 }
 
 .performer-attribute {
@@ -29,18 +29,10 @@
 
 .performer-selected {
   font-weight: bold;
-  background-color: plum;
+  background-color: cornflowerblue;
 }
 
 .performer-add-button {
-  background-color: bisque;
-  border: 2px solid darksalmon;
-  font-weight: bold;
-  padding: 6px;
-  text-align: center;
-}
-
-.performer-add-button:hover {
-  background-color: darksalmon;
-  cursor: pointer;
+  margin: 8px;
+  width: -webkit-fill-available;
 }

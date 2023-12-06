@@ -1,8 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
 html, body {
-  background-color: red;
   height: -webkit-fill-available;
   width: -webkit-fill-available;
   padding: 0;
   margin: 0;
+}
+
+button {
+  background-color: #cfe2f3;
+  border: 1px solid cornflowerblue;
+  border-radius: 4px;
+  padding: 8px;
+  font-size: 1em;
+  text-align: center;
+}
+
+button:hover {
+  background-color: cornflowerblue;
 }

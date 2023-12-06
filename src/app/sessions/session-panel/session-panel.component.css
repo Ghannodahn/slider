@@ -12,8 +12,8 @@
 
 .session-header {
   padding: 8px;
-  color: white;
-  background-color: navy;
+  font-weight: bold;
+  border-bottom: 1px solid cornflowerblue;
 }
 
 .session-entry {
@@ -25,10 +25,10 @@
 }
 
 .session-entry:hover:not(.session-selected) {
-  background-color: honeydew;
+  background-color: #cfe2f3;
 }
 
 .session-selected {
   font-weight: bold;
-  background-color: dodgerblue;
+  background-color: cornflowerblue;
 }

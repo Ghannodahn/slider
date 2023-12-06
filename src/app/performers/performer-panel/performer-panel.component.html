@@ -1,5 +1,5 @@
 <div class="performer-section">
-  <div class="performer-header">Performer</div>
+  <div class="performer-header">Performers</div>
   <slider-loading-panel-entry
     *ngIf="stateService.isPerformerLoading"></slider-loading-panel-entry>
   <div 
@@ -24,10 +24,10 @@
       </div>
     </div>
   </div>
-  <div
+  <button
     class="performer-add-button"
     *ngIf="stateService.isSessionSelected() && !isAdding && !stateService.isPerformerLoading"
-    (click)="onClickAddPerformer()">Add Performer...</div>
+    (click)="onClickAddPerformer()">Add Performer...</button>
   <slider-performer-new-panel
     *ngIf="isAdding"
     (submit)="onClickSubmitPerformer()">
