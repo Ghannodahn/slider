@@ -27,6 +27,10 @@
   font-weight: normal;
 }
 
+.performer-edit-button {
+  margin-top: 8px;
+}
+
 .performer-selected {
   font-weight: bold;
   background-color: cornflowerblue;

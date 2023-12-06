@@ -1,10 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { LoadingPanelEntryComponent } from '../../loading-panel-entry/loading-panel-entry.component';
-import { EmptyPerformer, Performer, newPerformer } from '../performer';
-import { PerformerNewPanelComponent } from '../perfomer-new-panel/performer-new-panel.component';
+import { EmptyPerformer, Performer } from '../performer';
+import { PerformerNewPanelComponent } from '../performer-edit-panel/performer-edit-panel.component';
 import { SessionManagerStateService } from '../../session-manager/session-manager-state.service';
-import { PerformersService } from '../performers.service';
 
 @Component({
   selector: 'slider-performer-panel',
@@ -19,18 +18,38 @@ import { PerformersService } from '../performers.service';
 })
 export class PerformerPanelComponent {
   @Input()
-  isAdding:Boolean = false;
+  isAdding: Boolean = false;
+  isEditing: Boolean = false;
 
   constructor(
     public stateService: SessionManagerStateService
   ) {}
   
   onClickPerformer(performer: Performer) {
+    if (this.isEditing) {
+      this.stateService.selectedPerformer.displayName = this.stateService.performerSnapshot.displayName;
+      this.stateService.selectedPerformer.sessionPos = this.stateService.performerSnapshot.sessionPos;
+      this.stateService.selectedPerformer.link = this.stateService.performerSnapshot.link;
+      this.stateService.selectedPerformer.socialIg = this.stateService.performerSnapshot.socialIg;
+
+      this.isEditing = false;
+    }
+
     if (this.stateService.selectedPerformer === performer) {
       this.stateService.selectedPerformer = EmptyPerformer;
     } else {
       this.stateService.selectedPerformer = performer;
     }
+  }
+
+  onClickEditPerformer(performer: Performer) {
+    this.isEditing = true;
+    this.stateService.performerSnapshot = structuredClone(performer);
+  }
+
+  onClickSubmitEditPerformer(performer: Performer) {
+    this.isEditing = false;
+    this.stateService.editPerformer(performer);
   }
 
   onClickAddPerformer() {
@@ -40,7 +59,7 @@ export class PerformerPanelComponent {
     this.isAdding = true;
   }
 
-  onClickSubmitPerformer(performer: Performer) {
+  onClickSubmitAddPerformer(performer: Performer) {
     this.isAdding = false;
     this.stateService.addPerformer(performer);
   }

@@ -3,12 +3,22 @@
   <slider-loading-panel-entry
     *ngIf="stateService.isPerformerLoading"></slider-loading-panel-entry>
   <div 
-    class="performer-entry"
-    *ngFor="let performer of stateService.performers"
-    [class.performer-selected]="stateService.selectedPerformer === performer"
-    (click)="onClickPerformer(performer)">
-    <div>{{ performer.displayName }}</div>
-    <div *ngIf="stateService.selectedPerformer === performer">
+    *ngFor="let performer of stateService.performers">
+    <slider-performer-edit-panel
+      *ngIf="isEditing && stateService.selectedPerformer === performer"
+      [performer]="performer"
+      (submit)="onClickSubmitEditPerformer(performer)">
+    </slider-performer-edit-panel>
+    <div
+      class="performer-entry"
+      *ngIf="stateService.selectedPerformer !== performer"
+      (click)="onClickPerformer(performer)">
+      <div class="performer-attribute">{{ performer.displayName }}</div>
+    </div>
+    <div
+      class="performer-selected performer-entry" 
+      *ngIf="!isEditing && stateService.selectedPerformer === performer">
+      <div class="performer-attribute">{{ performer.displayName }}</div>
       <div 
         *ngIf="stateService.selectedPerformer.socialIg"
         class="performer-attribute">
@@ -22,15 +32,18 @@
           target="_blank">
           {{ performer.link }}</a>
       </div>
+      <button
+        class="performer-edit-button"
+        (click)="onClickEditPerformer(performer)">Edit</button>
     </div>
   </div>
   <button
     class="performer-add-button"
     *ngIf="stateService.isSessionSelected() && !isAdding && !stateService.isPerformerLoading"
     (click)="onClickAddPerformer()">Add Performer...</button>
-  <slider-performer-new-panel
+  <slider-performer-edit-panel
     *ngIf="isAdding"
     [performer]="stateService.dirtyPerformer"
-    (submit)="onClickSubmitPerformer(stateService.dirtyPerformer)">
-  </slider-performer-new-panel>
+    (submit)="onClickSubmitAddPerformer(stateService.dirtyPerformer)">
+  </slider-performer-edit-panel>
 </div>

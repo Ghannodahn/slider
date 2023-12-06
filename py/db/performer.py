@@ -34,6 +34,15 @@ class Performer:
     with self.db.connect() as conn:
       conn.execute(sqlalchemy.text(sql))
       conn.commit()
+  
+  def edit(self, performerId, displayName, sessionPos, link, socialIg):
+    sql = EDIT_SQL.format(performerId, displayName, sessionPos, link, socialIg)
+    logging.warning("Executing SQL:")
+    logging.warning(sql)
+
+    with self.db.connect() as conn:
+      conn.execute(sqlalchemy.text(sql))
+      conn.commit()
       
 LIST_SQL = """
   SELECT
@@ -50,4 +59,14 @@ CREATE_SQL = """
   INSERT INTO 
     performer (sessionId, displayName, sessionPos, link, socialIg) 
     VALUES ({0}, '{1}', {2}, '{3}', '{4}')
+  """
+
+EDIT_SQL = """
+  UPDATE performer SET
+    displayName = '{1}',
+    sessionPos = {2},
+    link = '{3}',
+    socialIg = '{4}'
+  WHERE
+    performerId = {0}    
   """

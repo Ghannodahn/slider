@@ -22,6 +22,8 @@ class DbHandler:
       return self.handle_list_request(entity, args)
     elif operation == "create":
       return self.handle_create_request(entity, args)
+    elif operation == "edit":
+      return self.handle_edit_request(entity, args)
     else:
       raise Exception("Request failed: Operation {0} is unsupported.".format(operation))
 
@@ -43,10 +45,6 @@ class DbHandler:
 
       EventSession(self.db).create(startTime, endTime)
     elif entity == "performer":
-      self.log.warning("*** ARGS:")
-      self.log.warning(args)
-      self.log.warning("*** END ARGS")
-
       sessionId = args["sessionId"]
       displayName = args["displayName"]
       sessionPos = args["sessionPos"]
@@ -55,6 +53,24 @@ class DbHandler:
 
       try:
         Performer(self.db).create(sessionId, displayName, sessionPos, link, socialIg)
+      except Exception as err:
+        logging.error("handle_create_request failed")
+    else:
+      raise Exception("Request failed: Entity {0} does not exist.".format(entity))
+
+    
+  def handle_edit_request(self, entity, args):
+    if entity == "session":
+      raise Exception("Request failed: Updating Sessions is not currently supported.")
+    elif entity == "performer":
+      performerId = args["performerId"]
+      displayName = args["displayName"]
+      sessionPos = args["sessionPos"]
+      link = args["link"]
+      socialIg = args["socialIg"]
+
+      try:
+        Performer(self.db).edit(performerId, displayName, sessionPos, link, socialIg)
       except Exception as err:
         logging.error("handle_create_request failed")
     else:

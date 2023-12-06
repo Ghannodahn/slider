@@ -17,6 +17,8 @@ export class SessionManagerStateService {
   selectedPerformer: Performer = EmptyPerformer;
   isPerformerLoading: boolean = false;
 
+  performerSnapshot: Performer = EmptyPerformer;
+
   constructor(
     private sessionsService: SessionsService,
     private performersService: PerformersService
@@ -68,9 +70,18 @@ export class SessionManagerStateService {
     this.isPerformerLoading = true;
     this.performers.push(performer);
 
-    this.performersService.addPerformer(this.dirtyPerformer)
+    this.performersService.addPerformer(performer)
       .subscribe(() => {
         this.dirtyPerformer = newPerformer();
+        this.refreshPerformers();
+      });
+  }
+
+  public editPerformer(performer: Performer) {
+    this.isPerformerLoading = true;
+
+    this.performersService.editPerformer(performer)
+      .subscribe(() => {
         this.refreshPerformers();
       });
   }

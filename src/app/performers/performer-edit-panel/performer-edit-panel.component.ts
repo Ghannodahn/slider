@@ -5,14 +5,14 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Performer } from '../performer';
 
 @Component({
-  selector: 'slider-performer-new-panel',
+  selector: 'slider-performer-edit-panel',
   standalone: true,
   imports: [
     CommonModule,
     FormsModule,
   ],
-  templateUrl: './performer-new-panel.component.html',
-  styleUrl: './performer-new-panel.component.css'
+  templateUrl: './performer-edit-panel.component.html',
+  styleUrl: './performer-edit-panel.component.css'
 })
 export class PerformerNewPanelComponent {
   constructor() {}

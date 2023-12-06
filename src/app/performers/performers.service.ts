@@ -23,4 +23,12 @@ export class PerformersService {
 
     return this.http.put(createUrl, options);
   }
+
+  editPerformer(performer: Performer): Observable<object> {
+    var createUrl = "data/performer/edit";
+
+    var options = { params: performer };
+
+    return this.http.put(createUrl, options);
+  }
 }
