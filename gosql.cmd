@@ -1,1 +1,1 @@
-@gcloud sql connect slider-db --database=slider --user=slideradmin --quiet
+gcloud sql connect slider-db --database=slider --user=slideradmin --quiet

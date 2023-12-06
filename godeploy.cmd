@@ -1,1 +1,1 @@
-@gcloud app deploy --quiet
+gcloud app deploy --quiet

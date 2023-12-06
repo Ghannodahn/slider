@@ -1,1 +1,1 @@
-@ng build
+ng build
