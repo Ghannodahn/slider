@@ -22,7 +22,7 @@
   background-color: #cfe2f3;
 }
 
-.performer-attribute {
+.performer-attribute:not(:first-child) {
   padding-top: 8px;
   font-weight: normal;
 }

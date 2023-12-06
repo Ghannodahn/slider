@@ -13,7 +13,7 @@
       class="performer-entry"
       *ngIf="stateService.selectedPerformer !== performer"
       (click)="onClickPerformer(performer)">
-      <div class="performer-attribute">{{ performer.displayName }}</div>
+      {{ performer.displayName }}
     </div>
     <div
       class="performer-selected performer-entry" 
