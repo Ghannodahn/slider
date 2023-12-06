@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { SessionManagerStateService } from '../../session-manager/session-manager-state.service';
+
+import { Performer } from '../performer';
 
 @Component({
   selector: 'slider-performer-new-panel',
@@ -15,13 +15,13 @@ import { SessionManagerStateService } from '../../session-manager/session-manage
   styleUrl: './performer-new-panel.component.css'
 })
 export class PerformerNewPanelComponent {
-  constructor(
-    public stateService: SessionManagerStateService
-  ) {}
+  constructor() {}
   
-  @Output() submit = new EventEmitter();
+  @Input() performer: Performer | undefined;
+
+  @Output() submit = new EventEmitter<Performer>();
 
   onClickSubmit() {
-    this.submit.emit();
+    this.submit.emit(this.performer);
   }
 }

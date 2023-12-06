@@ -64,8 +64,9 @@ export class SessionManagerStateService {
       });
   }
 
-  public addPerformer() {
+  public addPerformer(performer: Performer) {
     this.isPerformerLoading = true;
+    this.performers.push(performer);
 
     this.performersService.addPerformer(this.dirtyPerformer)
       .subscribe(() => {

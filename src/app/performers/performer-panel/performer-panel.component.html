@@ -30,6 +30,7 @@
     (click)="onClickAddPerformer()">Add Performer...</button>
   <slider-performer-new-panel
     *ngIf="isAdding"
-    (submit)="onClickSubmitPerformer()">
+    [performer]="stateService.dirtyPerformer"
+    (submit)="onClickSubmitPerformer(stateService.dirtyPerformer)">
   </slider-performer-new-panel>
 </div>

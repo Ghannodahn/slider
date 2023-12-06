@@ -22,8 +22,7 @@ export class PerformerPanelComponent {
   isAdding:Boolean = false;
 
   constructor(
-    public stateService: SessionManagerStateService,
-    private performersService: PerformersService
+    public stateService: SessionManagerStateService
   ) {}
   
   onClickPerformer(performer: Performer) {
@@ -41,8 +40,8 @@ export class PerformerPanelComponent {
     this.isAdding = true;
   }
 
-  onClickSubmitPerformer() {
+  onClickSubmitPerformer(performer: Performer) {
     this.isAdding = false;
-    this.stateService.addPerformer();
+    this.stateService.addPerformer(performer);
   }
 }
