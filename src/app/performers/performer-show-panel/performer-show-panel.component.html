@@ -1,11 +1,11 @@
 <div class="canvas">
   <div class="preview-header">Preview</div>
   <div class="preview-placeholder"
-    *ngIf="!stateService.isPerformerSelected()">
+    *ngIf="!stateService.isPerformerSelected">
     <div>Select a <b>Performer</b> to see details</div>
   </div>
   <div class="preview-section"
-    *ngIf="stateService.isPerformerSelected()">
+    *ngIf="stateService.isPerformerSelected">
     <div class="display-name">
       {{ stateService.selectedPerformer.displayName }}
     </div>
@@ -17,10 +17,10 @@
     </div>
   </div>
   <div
-    *ngIf="stateService.isPerformerSelected()" 
+    *ngIf="stateService.nextPerformer" 
     class="preview-footer">
     <div class="next">
-      Next Up: TODO
+      Next Up: {{ stateService.nextPerformer.displayName }}
     </div>
   </div>
 </div>

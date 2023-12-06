@@ -40,7 +40,7 @@
   </div>
   <button
     class="performer-add-button"
-    *ngIf="stateService.isSessionSelected() && !isAdding && !stateService.isPerformerLoading"
+    *ngIf="stateService.isSessionSelected && !isAdding && !stateService.isPerformerLoading"
     (click)="onClickAddPerformer()">Add Performer...</button>
   <slider-performer-edit-panel
     *ngIf="isAdding"

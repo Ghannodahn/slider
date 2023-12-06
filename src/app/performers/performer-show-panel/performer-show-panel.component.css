@@ -49,29 +49,29 @@
 
 .preview-section > div {
   padding-top: 20px;
-  padding-bottom: 20px;  
+  padding-bottom: 20px; 
+  text-wrap: nowrap; 
 }
 
 .display-name {
-  font-size: 8em;
   text-align: center;
+  font-size: 6cqw;
 }
 
 .link {
-  font-size: 4em;
   font-family:'Courier New', Courier, monospace;
   text-align: center;
+  font-size: 4cqw;
 }
 
 .social-link {
-  font-size: 4em;
   font-family:'Courier New', Courier, monospace;
   text-align: center;
+  font-size: 4cqw;
 }
 
 .next {
-  font-size: 4em;
-  flex: grow;
+  font-size: 4cqw;
   text-align: center;
   vertical-align: middle;
   padding-top: 8px;

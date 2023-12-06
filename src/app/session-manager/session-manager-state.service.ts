@@ -34,11 +34,11 @@ export class SessionManagerStateService {
       });
   }
   
-  public isSessionSelected() : boolean {
+  public get isSessionSelected() : boolean {
     return (this.selectedSession !== EmptySession);
   }
 
-  public isPerformerSelected() : boolean {
+  public get isPerformerSelected() : boolean {
     return (this.selectedPerformer !== EmptyPerformer);
   }
 
@@ -90,5 +90,21 @@ export class SessionManagerStateService {
       .subscribe(() => {
         this.refreshPerformers();
       });
+  }
+
+  public get nextPerformer(): Performer | null {
+    if (this.isPerformerSelected) {
+      let selectedIndex = this.performers.indexOf(this.selectedPerformer);
+
+      if (selectedIndex === this.performers.length - 1) {
+        // Last Item
+        return null;
+      } else {
+        return this.performers[++selectedIndex];
+      }
+    } else {
+      // No selection
+      return null;
+    }
   }
 }
