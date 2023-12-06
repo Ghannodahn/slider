@@ -18,6 +18,7 @@
 
 .session-entry {
   padding: 8px;
+  font-family: Consolas, 'Courier New', Courier, monospace;
 }
 
 .session-entry:hover {

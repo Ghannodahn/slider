@@ -42,6 +42,12 @@ export class SessionManagerStateService {
     return (this.selectedPerformer !== EmptyPerformer);
   }
 
+  public cancelEdit() {
+    this.selectedPerformer.displayName = this.performerSnapshot.displayName;
+    this.selectedPerformer.sessionPos = this.performerSnapshot.sessionPos;
+    this.selectedPerformer.link = this.performerSnapshot.link;
+    this.selectedPerformer.socialIg = this.performerSnapshot.socialIg;
+  }
   public getNextSessionPos() : number {
     var lastPos = -1;
 

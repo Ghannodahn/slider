@@ -8,6 +8,10 @@ div.input-row {
   width: 100%;
 }
 
+div.button-row > button {
+  margin-right: 4px;
+}
+
 input {
   border: 0;
   display: block;

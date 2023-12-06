@@ -7,7 +7,8 @@
     <slider-performer-edit-panel
       *ngIf="isEditing && stateService.selectedPerformer === performer"
       [performer]="performer"
-      (submit)="onClickSubmitEditPerformer(performer)">
+      (submit)="onClickSubmitEditPerformer(performer)"
+      (cancel)="onClickCancelEditPerformer()">
     </slider-performer-edit-panel>
     <div
       class="performer-entry"
@@ -44,6 +45,7 @@
   <slider-performer-edit-panel
     *ngIf="isAdding"
     [performer]="stateService.dirtyPerformer"
-    (submit)="onClickSubmitAddPerformer(stateService.dirtyPerformer)">
+    (submit)="onClickSubmitAddPerformer(stateService.dirtyPerformer)"
+    (cancel)="onClickCancelAddPerformer()">
   </slider-performer-edit-panel>
 </div>

@@ -7,8 +7,9 @@ html, body {
 }
 
 button {
-  background-color: #cfe2f3;
-  border: 1px solid cornflowerblue;
+  background-color: #1155cc;
+  border: 1px solid #1155cc;
+  color: white;
   border-radius: 4px;
   padding: 8px;
   font-size: 1em;
@@ -16,5 +17,6 @@ button {
 }
 
 button:hover {
-  background-color: cornflowerblue;
+  background-color: #1c4587;
+  cursor: pointer;
 }

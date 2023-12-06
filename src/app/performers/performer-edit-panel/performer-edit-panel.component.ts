@@ -20,8 +20,13 @@ export class PerformerNewPanelComponent {
   @Input() performer: Performer | undefined;
 
   @Output() submit = new EventEmitter<Performer>();
+  @Output() cancel = new EventEmitter();
 
   onClickSubmit() {
     this.submit.emit(this.performer);
+  }
+
+  onClickCancel() {
+    this.cancel.emit();
   }
 }
