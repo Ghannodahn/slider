@@ -10,7 +10,9 @@
       <slider-performer-panel></slider-performer-panel>
     </div>
     <div class="performer-show-panel">
-      <slider-performer-show-panel></slider-performer-show-panel>
+      <slider-performer-show-panel
+        [performer]="stateService.selectedPerformer"
+        [nextPerformer]="stateService.nextPerformer"></slider-performer-show-panel>
     </div>
   </div>
 </div>

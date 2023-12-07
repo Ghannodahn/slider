@@ -1,26 +1,25 @@
 <div class="canvas">
   <div class="preview-header">Preview</div>
   <div class="preview-placeholder"
-    *ngIf="!stateService.isPerformerSelected">
+    *ngIf="!performer.performerId">
     <div>Select a <b>Performer</b> to see details</div>
   </div>
-  <div class="preview-section"
-    *ngIf="stateService.isPerformerSelected">
+  <div class="preview-section">
     <div class="display-name">
-      {{ stateService.selectedPerformer.displayName }}
+      {{ performer.displayName }}
     </div>
-    <div class="link" *ngIf="stateService.selectedPerformer.link">
-      URL: {{ stateService.selectedPerformer.link || "No Link" }}
+    <div class="link" *ngIf="performer.link">
+      URL: {{ performer.link || "No Link" }}
     </div>
-    <div class="social-link" *ngIf="stateService.selectedPerformer.socialIg">
-      IG: &#64;{{ stateService.selectedPerformer.socialIg || "UNDEFINED" }}
+    <div class="social-link" *ngIf="performer.socialIg">
+      IG: &#64;{{ performer.socialIg || "UNDEFINED" }}
     </div>
   </div>
   <div
-    *ngIf="stateService.nextPerformer" 
+    *ngIf="nextPerformer" 
     class="preview-footer">
     <div class="next">
-      Next Up: {{ stateService.nextPerformer.displayName }}
+      Next Up: {{ nextPerformer.displayName }}
     </div>
   </div>
 </div>

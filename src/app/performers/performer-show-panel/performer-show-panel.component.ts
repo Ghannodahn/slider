@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { SessionManagerStateService } from '../../session-manager/session-manager-state.service';
+import { Performer, EmptyPerformer } from '../performer';
 
 @Component({
   selector: 'slider-performer-show-panel',
@@ -10,7 +10,11 @@ import { SessionManagerStateService } from '../../session-manager/session-manage
   styleUrl: './performer-show-panel.component.css'
 })
 export class PerformerShowPanelComponent {
-  constructor (
-    public stateService: SessionManagerStateService
-  ) {}
+  constructor () {}
+
+  @Input()
+  performer: Performer = EmptyPerformer;
+
+  @Input()
+  nextPerformer: Performer | null = null;
 }
