@@ -24,6 +24,8 @@ class DbHandler:
       return self.handle_create_request(entity, args)
     elif operation == "edit":
       return self.handle_edit_request(entity, args)
+    elif operation == "reorder":
+      return self.handle_reorder_request(entity, args)
     else:
       raise Exception("Request failed: Operation {0} is unsupported.".format(operation))
 
@@ -51,10 +53,7 @@ class DbHandler:
       link = args["link"]
       socialIg = args["socialIg"]
 
-      try:
-        Performer(self.db).create(sessionId, displayName, sessionPos, link, socialIg)
-      except Exception as err:
-        logging.error("handle_create_request failed")
+      Performer(self.db).create(sessionId, displayName, sessionPos, link, socialIg)
     else:
       raise Exception("Request failed: Entity {0} does not exist.".format(entity))
 
@@ -69,9 +68,17 @@ class DbHandler:
       link = args["link"]
       socialIg = args["socialIg"]
 
-      try:
-        Performer(self.db).edit(performerId, displayName, sessionPos, link, socialIg)
-      except Exception as err:
-        logging.error("handle_create_request failed")
+      Performer(self.db).edit(performerId, displayName, sessionPos, link, socialIg)
+    else:
+      raise Exception("Request failed: Entity {0} does not exist.".format(entity))
+
+ 
+  def handle_reorder_request(self, entity, args):
+    if entity == "session":
+      raise Exception("Request failed: Reordering Sessions is not currently supported.")
+    elif entity == "performer":
+      newOrder = args
+
+      Performer(self.db).reorder(newOrder)
     else:
       raise Exception("Request failed: Entity {0} does not exist.".format(entity))

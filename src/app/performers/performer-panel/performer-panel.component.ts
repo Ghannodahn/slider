@@ -72,4 +72,32 @@ export class PerformerPanelComponent {
     this.isAdding = false;
     this.stateService.addPerformer(performer);
   }
+
+  onClickMoveUp(performer: Performer) {
+    var currentIdx = this.stateService.performers.indexOf(performer);
+    if (currentIdx == 0) {
+      throw "Target performer is first in the list and cannot be moved up.";
+    }
+
+    var previousIdx = currentIdx - 1;
+    var previousPerformer = this.stateService.performers[previousIdx];
+    this.stateService.performers.splice(
+      previousIdx, 2, performer, previousPerformer);
+
+    this.stateService.reorderPerformers();
+  }
+
+  onClickMoveDown(performer: Performer) {
+    var currentIdx = this.stateService.performers.indexOf(performer);
+    if (currentIdx >= this.stateService.performers.length - 1) {
+      throw "Target performer is last in the list and cannot be moved down.";
+    }
+
+    var nextIdx = currentIdx + 1;
+    var nextPerformer = this.stateService.performers[nextIdx];
+    this.stateService.performers.splice(
+      currentIdx, 2, nextPerformer, performer);
+      
+    this.stateService.reorderPerformers();
+  }
 }

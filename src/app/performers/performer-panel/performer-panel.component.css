@@ -40,3 +40,7 @@
   margin: 8px;
   width: -webkit-fill-available;
 }
+
+.performer-selected > button {
+  margin-right: 8px;
+}

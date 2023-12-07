@@ -92,6 +92,19 @@ export class SessionManagerStateService {
       });
   }
 
+  public reorderPerformers() {
+    //this.isPerformerLoading = true;
+    
+    for (var i = 0; i < this.performers.length; ++i) {
+      this.performers[i].sessionPos = i;
+    }
+
+    this.performersService.reorderPerformers(this.performers)
+      .subscribe(() => {
+//        this.refreshPerformers();
+      })
+  }
+
   public get nextPerformer(): Performer | null {
     if (this.isPerformerSelected) {
       let selectedIndex = this.performers.indexOf(this.selectedPerformer);

@@ -3,7 +3,7 @@
   <slider-loading-panel-entry
     *ngIf="stateService.isPerformerLoading"></slider-loading-panel-entry>
   <div 
-    *ngFor="let performer of stateService.performers">
+    *ngFor="let performer of stateService.performers; index as ctr">
     <slider-performer-edit-panel
       *ngIf="isEditing && stateService.selectedPerformer === performer"
       [performer]="performer"
@@ -36,7 +36,15 @@
       <button
         class="performer-edit-button"
         (click)="onClickEditPerformer(performer)">Edit</button>
-    </div>
+      <button
+        class="performer-moveup-button"
+        *ngIf="ctr > 0"
+        (click)="onClickMoveUp(performer)">Up</button>
+      <button
+        class="performer-moveup-button"
+        *ngIf="ctr < stateService.performers.length - 1"
+        (click)="onClickMoveDown(performer)">Down</button>
+      </div>
   </div>
   <button
     class="performer-add-button"

@@ -43,7 +43,19 @@ class Performer:
     with self.db.connect() as conn:
       conn.execute(sqlalchemy.text(sql))
       conn.commit()
-      
+  
+  def reorder(self, newOrder):
+    ids = [performer['id'] for performer in newOrder]
+    pos = [performer['pos'] for performer in newOrder]
+    sql = ORDER_SQL.format(
+      ", ".join(str(id) for id in ids),
+      ", ".join(str(pos) for pos in pos))
+
+    with self.db.connect() as conn:
+      conn.execute(sqlalchemy.text(sql))
+      conn.commit()
+
+
 LIST_SQL = """
   SELECT
     performerId, sessionId, displayName, link, socialIg, sessionPos
@@ -70,3 +82,13 @@ EDIT_SQL = """
   WHERE
     performerId = {0}    
   """
+
+ORDER_SQL = """
+UPDATE performer SET
+    sessionPos = positions.pos
+FROM
+    (SELECT 
+        UNNEST(ARRAY[{0}]) AS id,
+        UNNEST(ARRAY[{1}]) AS pos) AS positions
+    WHERE positions.id = performer.performerId;
+"""
