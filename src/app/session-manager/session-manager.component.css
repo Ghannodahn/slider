@@ -40,6 +40,11 @@
   flex-direction: column;
 }
 
+slider-performer-panel {
+  display: block;
+  height: 100%;
+}
+
 slider-performer-show-panel {
   flex-grow: 1;
   display: flex;

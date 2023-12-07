@@ -1,10 +1,20 @@
 
 .performer-section {
-  height: -webkit-fill-available;
+  height: 100%;
   width: -webkit-fill-available;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.section-body {
+  flex-grow: 1;
+  height: 0px;
+  overflow-y: auto;
 }
 
 .performer-header {
+  flex-grow: None;
   padding: 8px;
   font-weight: bold;
   border-bottom: 1px solid cornflowerblue;
