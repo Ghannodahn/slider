@@ -6,6 +6,7 @@ import { SessionPanelComponent } from '../sessions/session-panel/session-panel.c
 import { PerformerPanelComponent } from '../performers/performer-panel/performer-panel.component';
 import { PerformerShowPanelComponent } from '../performers/performer-show-panel/performer-show-panel.component';
 import { SessionManagerStateService } from './session-manager-state.service';
+import { AppHeaderComponent } from '../app-header/app-header.component';
 
 @Component({
   selector: 'slider-session-manager',
@@ -15,7 +16,8 @@ import { SessionManagerStateService } from './session-manager-state.service';
     DatePipe,
     SessionPanelComponent,
     PerformerPanelComponent,
-    PerformerShowPanelComponent
+    PerformerShowPanelComponent,
+    AppHeaderComponent,
   ],
   templateUrl: './session-manager.component.html',
   styleUrl: './session-manager.component.css'

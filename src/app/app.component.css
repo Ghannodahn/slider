@@ -8,3 +8,8 @@ slider-session-manager {
   flex-grow: 1;
   display: flex;
 }
+
+slider-app-header {
+  width: 100%;
+  display: block;
+}

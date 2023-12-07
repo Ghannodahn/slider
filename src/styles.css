@@ -20,3 +20,7 @@ button:hover {
   background-color: #1c4587;
   cursor: pointer;
 }
+
+slider-session-manager {
+  height: 100%;
+}
