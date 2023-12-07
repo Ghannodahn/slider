@@ -30,9 +30,16 @@ def data_connect_op_put(entity, operation):
   else:
      return {"status": "Succeeded"}
 
-# Local Testing Only.
+@app.route("/show")
+def return_showapp():
+  fullpath = "static/browser/index.html"
+
+  file = open(fullpath, "r")
+  result = file.read()
+  return Response(result, mimetype="text/html")
+        
 @app.route("/<filename>")
-def show_file(filename):
+def return_file(filename):
   fullpath = "static/browser/{0}".format(filename)
 
   extension_re = re.search(".*\.(.*)", filename)

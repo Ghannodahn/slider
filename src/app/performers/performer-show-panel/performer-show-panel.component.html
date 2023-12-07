@@ -4,7 +4,8 @@
     *ngIf="!performer.performerId">
     <div>Select a <b>Performer</b> to see details</div>
   </div>
-  <div class="preview-section">
+  <div class="preview-section"
+    *ngIf="performer.performerId">
     <div class="display-name">
       {{ performer.displayName }}
     </div>

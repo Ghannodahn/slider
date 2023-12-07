@@ -17,8 +17,8 @@ export class PerformersService {
   constructor(private http: HttpClient) { }
 
   listPerformers(sessionId: number): Observable<Performer[]> {
-    var listUrl = "data/performer/list?sessionId=" + sessionId;
-    return this.http.get<Performer[]>(listUrl);
+    var url = "data/performer/list?sessionId=" + sessionId;
+    return this.http.get<Performer[]>(url);
   }
 
   addPerformer(performer: Performer): Observable<object> {
@@ -57,5 +57,11 @@ export class PerformersService {
     var options = { params: {performerId: performer.performerId }};
 
     return this.http.put(url, options);
+  }
+
+  getPerformer(performerId: number): Observable<Performer> {
+    var url = "data/performer/get?performerId=" + performerId;
+
+    return this.http.get<Performer>(url);
   }
 }

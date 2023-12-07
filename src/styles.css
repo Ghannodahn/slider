@@ -24,3 +24,15 @@ button:hover {
 slider-session-manager {
   height: 100%;
 }
+
+slider-show {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+slider-performer-show-panel {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}

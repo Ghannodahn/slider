@@ -18,6 +18,8 @@ class DbHandler:
     self.db = init_connection_pool()
 
   def handle_request(self, entity, operation, args=None):
+    if operation == "get":
+      return self.handle_get_request(entity, args)
     if operation == "list":
       return self.handle_list_request(entity, args)
     elif operation == "create":
@@ -30,6 +32,17 @@ class DbHandler:
       return self.handle_delete_request(entity, args)
     else:
       raise Exception("Request failed: Operation {0} is unsupported.".format(operation))
+
+  def handle_get_request(self, entity, args):
+    if entity == "session":
+      raise Exception("Entity {0} does not support get operations.".format(entity))
+    elif entity == "performer":
+      performerId = args["performerId"]
+      rtn = Performer(self.db).get(performerId)
+    else:
+      raise Exception("Request failed: Entity {0} does not exist.".format(entity))
+    
+    return rtn
 
   def handle_list_request(self, entity, args=None):
     if entity == "session":

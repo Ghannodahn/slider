@@ -26,6 +26,26 @@ class Performer:
 
     return result
 
+  def get(self, sessionId):
+    sql = GET_SQL.format(sessionId)
+
+    with self.db.connect() as conn:
+      rows = conn.execute(
+              sqlalchemy.text(sql)
+          ).fetchall()
+    
+    row = rows[0]
+
+    result = {
+      "performerId": row[0], 
+      "sessionId": row[1], 
+      "displayName": row[2], 
+      "link": row[3],
+      "socialIg": row[4],
+      "sessionPos": row[5]}
+
+    return result
+
   def create(self, sessionId, displayName, sessionPos, link, socialIg):
     sql = CREATE_SQL.format(sessionId, displayName, sessionPos, link, socialIg)
     logging.warning("Executing SQL:")
@@ -101,4 +121,18 @@ FROM
 DELETE_SQL = """
 DELETE FROM performer 
 WHERE performerId = {0};
+"""
+
+GET_SQL = """
+SELECT
+  performerId,
+  sessionId,
+  displayName,
+  link,
+  socialIG,
+  sessionPos
+FROM
+  performer
+WHERE
+  performerId = {0};
 """
