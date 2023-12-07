@@ -26,6 +26,8 @@ class DbHandler:
       return self.handle_edit_request(entity, args)
     elif operation == "reorder":
       return self.handle_reorder_request(entity, args)
+    elif operation == "delete":
+      return self.handle_delete_request(entity, args)
     else:
       raise Exception("Request failed: Operation {0} is unsupported.".format(operation))
 
@@ -71,7 +73,6 @@ class DbHandler:
       Performer(self.db).edit(performerId, displayName, sessionPos, link, socialIg)
     else:
       raise Exception("Request failed: Entity {0} does not exist.".format(entity))
-
  
   def handle_reorder_request(self, entity, args):
     if entity == "session":
@@ -80,5 +81,15 @@ class DbHandler:
       newOrder = args
 
       Performer(self.db).reorder(newOrder)
+    else:
+      raise Exception("Request failed: Entity {0} does not exist.".format(entity))
+
+  def handle_delete_request(self, entity, args):
+    if entity == "session":
+      raise Exception("Request failed: Deleting Sessions is not currently supported.")
+    elif entity == "performer":
+      performerId = args["performerId"]
+
+      Performer(self.db).delete(performerId)
     else:
       raise Exception("Request failed: Entity {0} does not exist.".format(entity))

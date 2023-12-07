@@ -37,8 +37,6 @@ class Performer:
   
   def edit(self, performerId, displayName, sessionPos, link, socialIg):
     sql = EDIT_SQL.format(performerId, displayName, sessionPos, link, socialIg)
-    logging.warning("Executing SQL:")
-    logging.warning(sql)
 
     with self.db.connect() as conn:
       conn.execute(sqlalchemy.text(sql))
@@ -50,6 +48,13 @@ class Performer:
     sql = ORDER_SQL.format(
       ", ".join(str(id) for id in ids),
       ", ".join(str(pos) for pos in pos))
+
+    with self.db.connect() as conn:
+      conn.execute(sqlalchemy.text(sql))
+      conn.commit()
+
+  def delete(self, performerId):
+    sql = DELETE_SQL.format(performerId)
 
     with self.db.connect() as conn:
       conn.execute(sqlalchemy.text(sql))
@@ -70,7 +75,7 @@ LIST_SQL = """
 CREATE_SQL = """
   INSERT INTO 
     performer (sessionId, displayName, sessionPos, link, socialIg) 
-    VALUES ({0}, '{1}', {2}, '{3}', '{4}')
+    VALUES ({0}, '{1}', {2}, '{3}', '{4}');
   """
 
 EDIT_SQL = """
@@ -80,7 +85,7 @@ EDIT_SQL = """
     link = '{3}',
     socialIg = '{4}'
   WHERE
-    performerId = {0}    
+    performerId = {0};  
   """
 
 ORDER_SQL = """
@@ -91,4 +96,9 @@ FROM
         UNNEST(ARRAY[{0}]) AS id,
         UNNEST(ARRAY[{1}]) AS pos) AS positions
     WHERE positions.id = performer.performerId;
+"""
+
+DELETE_SQL = """
+DELETE FROM performer 
+WHERE performerId = {0};
 """

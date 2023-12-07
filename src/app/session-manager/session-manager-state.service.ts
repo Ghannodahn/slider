@@ -84,25 +84,26 @@ export class SessionManagerStateService {
   }
 
   public editPerformer(performer: Performer) {
-//    this.isPerformerLoading = true;
-
     this.performersService.editPerformer(performer)
-      .subscribe(() => {
-//        this.refreshPerformers();
-      });
+      .subscribe(() => { });
   }
 
   public reorderPerformers() {
-    //this.isPerformerLoading = true;
-    
     for (var i = 0; i < this.performers.length; ++i) {
       this.performers[i].sessionPos = i;
     }
 
     this.performersService.reorderPerformers(this.performers)
-      .subscribe(() => {
-//        this.refreshPerformers();
-      })
+      .subscribe(() => { });
+  }
+
+  public deletePerformer(performer: Performer) {
+    let selectedIndex = this.performers.indexOf(performer);
+    this.selectedPerformer = this.nextPerformer || this.performers[this.performers.length - 2];
+    this.performers.splice(selectedIndex, 1);
+    
+    this.performersService.deletePerformer(performer)
+      .subscribe(() => { });
   }
 
   public get nextPerformer(): Performer | null {

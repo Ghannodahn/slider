@@ -19,4 +19,3 @@ export function newPerformer() {
     sessionPos: 0
   }
 }
- 

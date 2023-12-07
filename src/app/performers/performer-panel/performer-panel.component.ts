@@ -100,4 +100,8 @@ export class PerformerPanelComponent {
       
     this.stateService.reorderPerformers();
   }
+
+  onClickDelete(performer: Performer) {
+    this.stateService.deletePerformer(performer);
+  }
 }

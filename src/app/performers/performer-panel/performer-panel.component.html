@@ -45,6 +45,9 @@
           class="performer-moveup-button"
           *ngIf="ctr < stateService.performers.length - 1"
           (click)="onClickMoveDown(performer)">Down</button>
+        <button
+          class="performer-delete-button"
+          (click)="onClickDelete(performer)">X</button>
         </div>
     </div>
     <button

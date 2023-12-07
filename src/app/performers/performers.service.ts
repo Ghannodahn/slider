@@ -50,4 +50,12 @@ export class PerformersService {
 
     return this.http.put(url, options);
   }
+
+  deletePerformer(performer: Performer): Observable<object> {
+    var url = "data/performer/delete";
+
+    var options = { params: {performerId: performer.performerId }};
+
+    return this.http.put(url, options);
+  }
 }
