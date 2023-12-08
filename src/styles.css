@@ -4,6 +4,7 @@ html, body {
   width: -webkit-fill-available;
   padding: 0;
   margin: 0;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 button {

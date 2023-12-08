@@ -1,5 +1,6 @@
 <div class="canvas">
-  <div class="preview-header">Preview</div>
+  <div class="preview-header"
+    *ngIf="showHeader">Preview</div>
   <div class="preview-placeholder"
     *ngIf="!performer.performerId">
     <div>Select a <b>Performer</b> to see details</div>

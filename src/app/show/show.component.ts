@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { PerformerShowPanelComponent } from '../performers/performer-show-panel/performer-show-panel.component';
 import { ShowStateService } from './show-state.service';
 

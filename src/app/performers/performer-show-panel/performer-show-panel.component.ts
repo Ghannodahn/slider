@@ -17,4 +17,8 @@ export class PerformerShowPanelComponent {
 
   @Input()
   nextPerformer: Performer | null = null;
+
+  @Input()
+  showHeader: Boolean = true;
+
 }
