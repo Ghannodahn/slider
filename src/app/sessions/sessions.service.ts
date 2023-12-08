@@ -16,11 +16,30 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class SessionsService {
-  listUrl = "data/session"
 
   constructor(private http: HttpClient) { }
 
-  listSessions(): Observable<Session[]> {
-    return this.http.get<Session[]>(this.listUrl);
+  list(): Observable<Session[]> {
+    var url = "data/session/list"
+    return this.http.get<Session[]>(url);
+  }
+
+  get(sessionId: Number): Observable<Session> {
+    var url = "data/session/get"
+    var options = { params: { sessionId: sessionId } };
+
+    return this.http.get<Session>(url);
+  }
+
+  update(session: Session): Observable<object> {
+    var url = "data/session/edit"
+    var options = {params: {
+      sessionId: session.sessionId,
+      startTime: session.startTime,
+      endTime: session.endTime,
+      currentPos: session.currentPos
+    }};
+
+    return this.http.put(url, options);
   }
 }

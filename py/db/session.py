@@ -12,7 +12,7 @@ class Session:
       FROM 
         EventSession
       WHERE
-        sessionId = {0}
+        sessionId = {0};
     """.format(sessionId)
     logging.warning(msg=sql)
     with self.db.connect() as conn:
@@ -35,6 +35,8 @@ class Session:
         sessionId, startTime, endTime, currentPos
       FROM 
         EventSession
+      ORDER BY
+        startTime;
     """
     with self.db.connect() as conn:
       rows = conn.execute(
@@ -54,3 +56,25 @@ class Session:
     # This will be replaced with real information in later steps.
     return result
   
+  def edit(self, sessionId, startTime, endTime, currentPos):
+    sql = """
+      UPDATE EventSession SET
+        startTime = '{1}',
+        endTime = '{2}',
+        currentPos = {3}
+      WHERE
+        sessionId = {0};
+    """.format(
+      sessionId,
+      startTime,
+      endTime,
+      currentPos
+    )
+
+    logging.warning(sql)
+
+    with self.db.connect() as conn:
+      conn.execute(sqlalchemy.text(sql))
+      conn.commit()
+    
+    return []

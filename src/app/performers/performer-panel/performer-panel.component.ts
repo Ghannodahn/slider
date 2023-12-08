@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
 import { LoadingPanelEntryComponent } from '../../loading-panel-entry/loading-panel-entry.component';
 import { EmptyPerformer, Performer, newPerformer } from '../performer';
 import { PerformerNewPanelComponent } from '../performer-edit-panel/performer-edit-panel.component';
@@ -10,6 +12,7 @@ import { SessionManagerStateService } from '../../session-manager/session-manage
   standalone: true,
   imports: [
     CommonModule,
+    FormsModule,
     LoadingPanelEntryComponent,
     PerformerNewPanelComponent,
   ],
@@ -103,5 +106,9 @@ export class PerformerPanelComponent {
 
   onClickDelete(performer: Performer) {
     this.stateService.deletePerformer(performer);
+  }
+
+  onCurrentPosChange(newPos: Number) {
+    this.stateService.updateSession(this.stateService.selectedSession);
   }
 }

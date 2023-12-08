@@ -27,7 +27,7 @@ export class SessionManagerStateService {
   public refreshSessions() {
     this.isSessionLoading = true;
 
-    this.sessionsService.listSessions()
+    this.sessionsService.list()
       .subscribe(sessions => {
         this.isSessionLoading = false;
         this.sessions = sessions;
@@ -48,6 +48,7 @@ export class SessionManagerStateService {
     this.selectedPerformer.link = this.performerSnapshot.link;
     this.selectedPerformer.socialIg = this.performerSnapshot.socialIg;
   }
+
   public getNextSessionPos() : number {
     var lastPos = -1;
 
@@ -120,5 +121,10 @@ export class SessionManagerStateService {
       // No selection
       return null;
     }
+  }
+
+  public updateSession(session: Session) {
+    this.sessionsService.update(session)
+      .subscribe(() => { });
   }
 }

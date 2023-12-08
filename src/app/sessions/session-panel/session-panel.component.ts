@@ -23,7 +23,7 @@ export class SessionPanelComponent {
   ) {}
 
   private getSessions() {
-    this.sessionsService.listSessions()
+    this.sessionsService.list()
       .subscribe(sessions => this.stateService.sessions = sessions)
   }
   
