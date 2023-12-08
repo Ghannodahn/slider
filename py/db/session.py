@@ -1,8 +1,33 @@
+import logging
 import sqlalchemy
 
 class Session:
   def __init__(self, db):
     self.db = db
+
+  def get(self, sessionId):
+    sql = """
+      SELECT 
+        sessionId, startTime, endTime, currentPos
+      FROM 
+        EventSession
+      WHERE
+        sessionId = {0}
+    """.format(sessionId)
+    logging.warning(msg=sql)
+    with self.db.connect() as conn:
+      rows = conn.execute(
+              sqlalchemy.text(sql)
+          ).fetchall()
+    
+    row = rows[0]
+    result = [{
+        "sessionId": row[0], 
+        "startTime": row[1], 
+        "endTime": row[2], 
+        "currentPos": row[3]}]
+    
+    return result
 
   def list(self):
     sql = """
