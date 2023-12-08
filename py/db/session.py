@@ -1,6 +1,6 @@
 import sqlalchemy
 
-class EventSession:
+class Session:
   def __init__(self, db):
     self.db = db
 

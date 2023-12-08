@@ -26,8 +26,8 @@ class Performer:
 
     return result
 
-  def get(self, sessionId):
-    sql = GET_SQL.format(sessionId)
+  def get(self, performerId):
+    sql = GET_SQL.format(performerId)
 
     with self.db.connect() as conn:
       rows = conn.execute(
