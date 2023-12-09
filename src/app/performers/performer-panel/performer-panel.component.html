@@ -4,7 +4,7 @@
    <slider-loading-panel-entry
       *ngIf="stateService.isPerformerLoading"></slider-loading-panel-entry>
     <table>
-      <tr *ngFor="let performer of stateService.performers; index as ctr">
+      <tr *ngFor="let performer of stateService.selectedSession.performers; index as ctr">
         <td>
           <input type="radio"
             [(ngModel)]="stateService.selectedSession.currentPos"
@@ -50,7 +50,7 @@
               (click)="onClickMoveUp(performer)">Up</button>
             <button
               class="performer-moveup-button"
-              *ngIf="ctr < stateService.performers.length - 1"
+              *ngIf="ctr < stateService.selectedSession.performers.length - 1"
               (click)="onClickMoveDown(performer)">Down</button>
             <button
               class="performer-delete-button"

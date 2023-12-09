@@ -66,46 +66,46 @@ export class PerformerPanelComponent {
 
   onClickAddPerformer() {
     this.stateService.dirtyPerformer.sessionId = this.stateService.selectedSession.sessionId;
-    this.stateService.dirtyPerformer.sessionPos = this.stateService.getNextSessionPos();
+    this.stateService.dirtyPerformer.sessionPos = this.stateService.getNextSessionPos(this.stateService.selectedSession);
   
     this.isAdding = true;
   }
 
   onClickSubmitAddPerformer(performer: Performer) {
     this.isAdding = false;
-    this.stateService.addPerformer(performer);
+    this.stateService.addPerformer(this.stateService.selectedSession, performer);
   }
 
   onClickMoveUp(performer: Performer) {
-    var currentIdx = this.stateService.performers.indexOf(performer);
+    var currentIdx = this.stateService.selectedSession.performers.indexOf(performer);
     if (currentIdx == 0) {
       throw "Target performer is first in the list and cannot be moved up.";
     }
 
     var previousIdx = currentIdx - 1;
-    var previousPerformer = this.stateService.performers[previousIdx];
-    this.stateService.performers.splice(
+    var previousPerformer = this.stateService.selectedSession.performers[previousIdx];
+    this.stateService.selectedSession.performers.splice(
       previousIdx, 2, performer, previousPerformer);
 
-    this.stateService.reorderPerformers();
+    this.stateService.reorderPerformers(this.stateService.selectedSession);
   }
 
   onClickMoveDown(performer: Performer) {
-    var currentIdx = this.stateService.performers.indexOf(performer);
-    if (currentIdx >= this.stateService.performers.length - 1) {
+    var currentIdx = this.stateService.selectedSession.performers.indexOf(performer);
+    if (currentIdx >= this.stateService.selectedSession.performers.length - 1) {
       throw "Target performer is last in the list and cannot be moved down.";
     }
 
     var nextIdx = currentIdx + 1;
-    var nextPerformer = this.stateService.performers[nextIdx];
-    this.stateService.performers.splice(
+    var nextPerformer = this.stateService.selectedSession.performers[nextIdx];
+    this.stateService.selectedSession.performers.splice(
       currentIdx, 2, nextPerformer, performer);
       
-    this.stateService.reorderPerformers();
+    this.stateService.reorderPerformers(this.stateService.selectedSession);
   }
 
   onClickDelete(performer: Performer) {
-    this.stateService.deletePerformer(performer);
+    this.stateService.deletePerformer(this.stateService.selectedSession, performer);
   }
 
   onCurrentPosChange(newPos: Number) {

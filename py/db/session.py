@@ -7,12 +7,24 @@ class Session:
 
   def get(self, sessionId):
     sql = """
-      SELECT 
-        sessionId, startTime, endTime, currentPos
-      FROM 
-        EventSession
+      SELECT
+          s.sessionId, 
+          s.startTime,
+          s.endTime,
+          s.currentPos,
+          to_json(ARRAY(SELECT 
+              json_build_object(
+                  'performerId', p.performerId, 
+                  'sessionId', p.sessionId,
+                  'displayName', p.displayName,
+                  'link', p.link,
+                  'socialIg', p.socialIg) 
+              FROM Performer p 
+              WHERE p.sessionId = s.sessionId 
+          )) performers
+      FROM EventSession s
       WHERE
-        sessionId = {0};
+        s.sessionId = {0};
     """.format(sessionId)
     logging.warning(msg=sql)
     with self.db.connect() as conn:
@@ -25,18 +37,32 @@ class Session:
         "sessionId": row[0], 
         "startTime": row[1], 
         "endTime": row[2], 
-        "currentPos": row[3]}
+        "currentPos": row[3],
+        "performers": row[4]}
     
     return result
 
   def list(self):
     sql = """
       SELECT 
-        sessionId, startTime, endTime, currentPos
+        s.sessionId,
+        s.startTime, 
+        s.endTime,
+        s.currentPos,
+        to_json(ARRAY(SELECT 
+            json_build_object(
+                'performerId', p.performerId, 
+                'sessionId', p.sessionId,
+                'displayName', p.displayName,
+                'link', p.link,
+                'socialIg', p.socialIg) 
+            FROM Performer p 
+            WHERE p.sessionId = s.sessionId 
+        )) performers
       FROM 
-        EventSession
+        EventSession s
       ORDER BY
-        startTime;
+        s.startTime;
     """
     with self.db.connect() as conn:
       rows = conn.execute(
@@ -50,7 +76,8 @@ class Session:
         "sessionId": row[0], 
         "startTime": row[1], 
         "endTime": row[2], 
-        "currentPos": row[3]})
+        "currentPos": row[3],
+        "performers": row[4]})
 
     # For the sake of example, use static information to inflate the template.
     # This will be replaced with real information in later steps.
