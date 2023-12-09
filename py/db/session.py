@@ -21,11 +21,11 @@ class Session:
           ).fetchall()
     
     row = rows[0]
-    result = [{
+    result = {
         "sessionId": row[0], 
         "startTime": row[1], 
         "endTime": row[2], 
-        "currentPos": row[3]}]
+        "currentPos": row[3]}
     
     return result
 

@@ -25,8 +25,7 @@ export class SessionsService {
   }
 
   get(sessionId: Number): Observable<Session> {
-    var url = "data/session/get"
-    var options = { params: { sessionId: sessionId } };
+    var url = "data/session/get?sessionId=" + sessionId;
 
     return this.http.get<Session>(url);
   }

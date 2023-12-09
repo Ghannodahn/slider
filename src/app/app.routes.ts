@@ -5,5 +5,5 @@ import { ShowComponent } from './show/show.component';
 
 export const routes: Routes = [
     {path: '', component: SessionManagerComponent},
-    {path: 'show', component: ShowComponent}
+    {path: 'show/:sessionId', component: ShowComponent}
 ];

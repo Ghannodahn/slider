@@ -37,6 +37,14 @@ def return_showapp():
   file = open(fullpath, "r")
   result = file.read()
   return Response(result, mimetype="text/html")
+
+@app.route("/show/<sessionid>")
+def return_showapp_withsession(sessionid):
+  fullpath = "static/browser/index.html"
+
+  file = open(fullpath, "r")
+  result = file.read()
+  return Response(result, mimetype="text/html")
         
 @app.route("/<filename>")
 def return_file(filename):
