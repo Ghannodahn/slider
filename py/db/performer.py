@@ -63,12 +63,16 @@ class Performer:
       conn.commit()
   
   def reorder(self, newOrder):
+    logging.warning("reorder")
+    logging.warning(newOrder)
     ids = [performer['id'] for performer in newOrder]
     pos = [performer['pos'] for performer in newOrder]
     sql = ORDER_SQL.format(
       ", ".join(str(id) for id in ids),
       ", ".join(str(pos) for pos in pos))
 
+    logging.warning(sql)
+    
     with self.db.connect() as conn:
       conn.execute(sqlalchemy.text(sql))
       conn.commit()

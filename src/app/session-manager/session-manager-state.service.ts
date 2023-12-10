@@ -87,6 +87,12 @@ export class SessionManagerStateService {
       session.performers[i].sessionPos = i;
     }
 
+    session.currentPos = session.performers.indexOf(
+      this.selectedPerformer);
+
+    this.sessionsService.update(session)
+      .subscribe(() => { });
+
     this.performersService.reorderPerformers(session.performers)
       .subscribe(() => { });
   }
