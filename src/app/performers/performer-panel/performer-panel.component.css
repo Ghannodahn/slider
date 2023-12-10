@@ -13,6 +13,14 @@
   overflow-y: auto;
 }
 
+.section-body > table {
+  width: 100%
+}
+
+tr.selected {
+  background-color: cornflowerblue;
+}
+
 .performer-header {
   flex-grow: None;
   padding: 8px;
@@ -28,7 +36,7 @@
   cursor: pointer;
 }
 
-.performer-entry:hover:not(.performer-selected) {
+.performer-row:hover:not(.selected) {
   background-color: #cfe2f3;
 }
 
@@ -43,7 +51,6 @@
 
 .performer-selected {
   font-weight: bold;
-  background-color: cornflowerblue;
 }
 
 .performer-add-button {

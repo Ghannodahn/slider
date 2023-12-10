@@ -3,8 +3,11 @@
   <div class="section-body">
    <slider-loading-panel-entry
       *ngIf="stateService.isPerformerLoading"></slider-loading-panel-entry>
-    <table>
-      <tr *ngFor="let performer of stateService.selectedSession.performers; index as ctr">
+    <table
+      cellspacing="0" cellpadding="0">
+      <tr *ngFor="let performer of stateService.selectedSession.performers; index as ctr"
+        class="performer-row"
+        [class.selected]="stateService.selectedPerformer === performer">
         <td>
           <input type="radio"
             [(ngModel)]="stateService.selectedSession.currentPos"
@@ -28,19 +31,6 @@
             class="performer-selected performer-entry" 
             *ngIf="!isEditing && stateService.selectedPerformer === performer">
             <div class="performer-attribute">{{ performer.displayName }}</div>
-            <div 
-              *ngIf="stateService.selectedPerformer.socialIg"
-              class="performer-attribute">
-              &#64;{{ performer.socialIg }}
-            </div>
-            <div 
-              *ngIf="stateService.selectedPerformer.link"
-              class="performer-attribute">
-              <a 
-                [href]="stateService.selectedPerformer.link"
-                target="_blank">
-                {{ performer.link }}</a>
-            </div>
             <button
               class="performer-edit-button"
               (click)="onClickEditPerformer(performer)">Edit</button>
