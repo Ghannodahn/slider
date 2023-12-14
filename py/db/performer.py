@@ -46,16 +46,14 @@ class Performer:
 
     return result
 
-  def create(self, sessionId, displayName, sessionPos, link, socialIg):
+  def create(self, sessionId, displayName, sessionPos, link, socialIg, **args):
     sql = CREATE_SQL.format(sessionId, displayName, sessionPos, link, socialIg)
-    logging.warning("Executing SQL:")
-    logging.warning(sql)
 
     with self.db.connect() as conn:
       conn.execute(sqlalchemy.text(sql))
       conn.commit()
   
-  def edit(self, performerId, displayName, sessionPos, link, socialIg):
+  def edit(self, performerId, displayName, sessionPos, link, socialIg, **args):
     sql = EDIT_SQL.format(performerId, displayName, sessionPos, link, socialIg)
 
     with self.db.connect() as conn:

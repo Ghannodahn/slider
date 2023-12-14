@@ -13,6 +13,15 @@
   overflow-y: auto;
 }
 
+.section-body > table {
+  border-spacing: 0;
+  width: 100%;
+}
+
+.section-body td {
+  padding: 0;
+}
+
 .performer-header {
   flex-grow: None;
   padding: 8px;
@@ -28,7 +37,7 @@
   cursor: pointer;
 }
 
-.performer-entry:hover:not(.performer-selected) {
+tr:not(.performer-selected) .performer-entry:hover {
   background-color: #cfe2f3;
 }
 
@@ -37,11 +46,13 @@
   font-weight: normal;
 }
 
-.performer-edit-button {
+.performer-entry > button {
   margin-top: 8px;
+  margin-right: 4px;
 }
 
 .performer-selected {
+  color: white;
   font-weight: bold;
   background-color: cornflowerblue;
 }
@@ -49,8 +60,4 @@
 .performer-add-button {
   margin: 8px;
   width: -webkit-fill-available;
-}
-
-.performer-selected > button {
-  margin-right: 8px;
 }

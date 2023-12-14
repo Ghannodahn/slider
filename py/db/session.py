@@ -16,11 +16,13 @@ class Session:
               json_build_object(
                   'performerId', p.performerId, 
                   'sessionId', p.sessionId,
+                  'sessionPos', p.sessionPos,
                   'displayName', p.displayName,
                   'link', p.link,
                   'socialIg', p.socialIg) 
               FROM Performer p 
               WHERE p.sessionId = s.sessionId 
+              ORDER BY p.sessionPos
           )) performers
       FROM EventSession s
       WHERE
@@ -53,17 +55,20 @@ class Session:
             json_build_object(
                 'performerId', p.performerId, 
                 'sessionId', p.sessionId,
+                'sessionPos', p.sessionPos,
                 'displayName', p.displayName,
                 'link', p.link,
                 'socialIg', p.socialIg) 
             FROM Performer p 
             WHERE p.sessionId = s.sessionId 
+            ORDER BY p.sessionPos
         )) performers
       FROM 
         EventSession s
       ORDER BY
-        s.startTime;
+        s.startTime DESC;
     """
+    logging.warning(sql)
     with self.db.connect() as conn:
       rows = conn.execute(
               sqlalchemy.text(sql)

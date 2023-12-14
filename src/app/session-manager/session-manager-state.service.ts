@@ -37,6 +37,12 @@ export class SessionManagerStateService {
     this.sessionsService.get(session.sessionId)
       .subscribe(updatedSession => {
         this.sessions[this.sessions.indexOf(session)] = updatedSession;
+        
+        if (updatedSession.sessionId === this.selectedSession.sessionId) {
+          this.selectedSession = updatedSession;
+        }
+
+        this.isPerformerLoading = false;
       });
 
   }

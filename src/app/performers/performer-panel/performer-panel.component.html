@@ -3,8 +3,10 @@
   <div class="section-body">
    <slider-loading-panel-entry
       *ngIf="stateService.isPerformerLoading"></slider-loading-panel-entry>
-    <table>
-      <tr *ngFor="let performer of stateService.selectedSession.performers; index as ctr">
+    <table cellspacing="0" cellpadding="0">
+      <tr 
+        *ngFor="let performer of stateService.selectedSession.performers; index as ctr"
+        [class.performer-selected]="stateService.selectedPerformer === performer">
         <td>
           <input type="radio"
             [(ngModel)]="stateService.selectedSession.currentPos"
@@ -25,7 +27,7 @@
             {{ performer.displayName }}
           </div>
           <div
-            class="performer-selected performer-entry" 
+            class="performer-entry" 
             *ngIf="!isEditing && stateService.selectedPerformer === performer">
             <div class="performer-attribute">{{ performer.displayName }}</div>
             <div 
