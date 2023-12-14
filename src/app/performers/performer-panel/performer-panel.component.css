@@ -14,12 +14,11 @@
 }
 
 .section-body > table {
-  border-spacing: 0;
-  width: 100%;
+  width: 100%
 }
 
-.section-body td {
-  padding: 0;
+tr.selected {
+  background-color: cornflowerblue;
 }
 
 .performer-header {
@@ -37,7 +36,7 @@
   cursor: pointer;
 }
 
-tr:not(.performer-selected) .performer-entry:hover {
+.performer-entry:hover:not(.performer-selected) {
   background-color: #cfe2f3;
 }
 
@@ -54,7 +53,6 @@ tr:not(.performer-selected) .performer-entry:hover {
 .performer-selected {
   color: white;
   font-weight: bold;
-  background-color: cornflowerblue;
 }
 
 .performer-add-button {
