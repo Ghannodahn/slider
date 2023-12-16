@@ -46,7 +46,7 @@ export class PerformersService {
         "id": performer.performerId, 
         "pos": performer.sessionPos});
     })
-    var options = { params: newOrder }
+    var options = { params: { newOrder: newOrder } };
 
     return this.http.put(url, options);
   }

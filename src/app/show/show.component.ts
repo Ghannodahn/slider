@@ -20,13 +20,10 @@ export class ShowComponent {
   ) {}
 
   ngOnInit(): void {
-    console.log("Reading Parameters.")
     this.route.paramMap
       .subscribe((params) => {
-        console.log("Parameters read.")
-        console.log(params);
-        this.stateService.sessionId = Number(params.get('sessionId'));
-        this.stateService.refresh(5000);
+        var sessionId = Number(params.get('sessionId'));
+        this.stateService.refresh(sessionId);
       });
   } 
 }

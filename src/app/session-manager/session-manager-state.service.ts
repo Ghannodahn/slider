@@ -12,7 +12,6 @@ export class SessionManagerStateService {
   selectedSession: Session = EmptySession;
   isSessionLoading: boolean = false;
 
-  performers: Performer[] = [];
   dirtyPerformer: Performer = newPerformer();
   selectedPerformer: Performer = EmptyPerformer;
   isPerformerLoading: boolean = false;
@@ -34,6 +33,19 @@ export class SessionManagerStateService {
       });
   }
   
+  public refreshSession(session: Session) {
+    this.sessionsService.get(session.sessionId)
+      .subscribe(updatedSession => {
+        this.sessions[this.sessions.indexOf(session)] = updatedSession;
+        
+        if (updatedSession.sessionId === this.selectedSession.sessionId) {
+          this.selectedSession = updatedSession;
+        }
+
+        this.isPerformerLoading = false;
+      });
+
+  }
   public get isSessionSelected() : boolean {
     return (this.selectedSession !== EmptySession);
   }
@@ -49,10 +61,10 @@ export class SessionManagerStateService {
     this.selectedPerformer.socialIg = this.performerSnapshot.socialIg;
   }
 
-  public getNextSessionPos() : number {
+  public getNextSessionPos(session: Session) : number {
     var lastPos = -1;
 
-    this.performers.forEach(function(performer) {
+    session.performers.forEach(function(performer) {
       if (performer.sessionPos > lastPos) {
         lastPos = performer.sessionPos;
       }
@@ -61,26 +73,13 @@ export class SessionManagerStateService {
     return ++lastPos;
   }
 
-  public refreshPerformers() {
-    if (!this.selectedSession) { return; }
-
+  public addPerformer(session: Session, performer: Performer) {
     this.isPerformerLoading = true;
-
-    this.performersService.listPerformers(this.selectedSession.sessionId)
-      .subscribe(performer => {    
-        this.isPerformerLoading = false;
-        this.performers = performer;
-      });
-  }
-
-  public addPerformer(performer: Performer) {
-    this.isPerformerLoading = true;
-    this.performers = [];
     this.dirtyPerformer = newPerformer();
 
     this.performersService.addPerformer(performer)
       .subscribe(() => {
-        this.refreshPerformers();
+        this.refreshSession(session);
       });
   }
 
@@ -89,33 +88,41 @@ export class SessionManagerStateService {
       .subscribe(() => { });
   }
 
-  public reorderPerformers() {
-    for (var i = 0; i < this.performers.length; ++i) {
-      this.performers[i].sessionPos = i;
+  public reorderPerformers(session: Session) {
+    for (var i = 0; i < session.performers.length; ++i) {
+      session.performers[i].sessionPos = i;
     }
 
-    this.performersService.reorderPerformers(this.performers)
+    session.currentPos = session.performers.indexOf(
+      this.selectedPerformer);
+
+    this.sessionsService.update(session)
+      .subscribe(() => { });
+
+    this.performersService.reorderPerformers(session.performers)
       .subscribe(() => { });
   }
 
-  public deletePerformer(performer: Performer) {
-    let selectedIndex = this.performers.indexOf(performer);
-    this.selectedPerformer = this.nextPerformer || this.performers[this.performers.length - 2];
-    this.performers.splice(selectedIndex, 1);
+  public deletePerformer(session: Session, performer: Performer) {
+    let selectedIndex = session.performers.indexOf(performer);
+    this.selectedPerformer = 
+      this.getNextPerformer(session) || 
+      session.performers[session.performers.length - 2];
+    session.performers.splice(selectedIndex, 1);
     
     this.performersService.deletePerformer(performer)
       .subscribe(() => { });
   }
 
-  public get nextPerformer(): Performer | null {
+  public getNextPerformer(session: Session): Performer | null {
     if (this.isPerformerSelected) {
-      let selectedIndex = this.performers.indexOf(this.selectedPerformer);
+      let selectedIndex = session.performers.indexOf(this.selectedPerformer);
 
-      if (selectedIndex === this.performers.length - 1) {
+      if (selectedIndex === session.performers.length - 1) {
         // Last Item
         return null;
       } else {
-        return this.performers[++selectedIndex];
+        return session.performers[++selectedIndex];
       }
     } else {
       // No selection

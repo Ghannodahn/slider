@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { PerformersService } from '../performers/performers.service';
 import { Performer, EmptyPerformer } from '../performers/performer';
 import { SessionsService } from '../sessions/sessions.service';
 import { EmptySession, Session } from '../sessions/session';
@@ -9,38 +8,28 @@ import { EmptySession, Session } from '../sessions/session';
 })
 export class ShowStateService {
   constructor(
-    private performersService: PerformersService,
     private sessionsService: SessionsService
   ) { }
 
-  sessionId?: number;
   currentSession: Session = EmptySession;
   currentPerformer: Performer = EmptyPerformer;
-  performers: Performer[] = [];
+  autoRefreshMs: number = 5000;
 
-  refresh(autoRefreshSec?: number) {
-    if (this.sessionId) {
-      this.sessionsService.get(this.sessionId)
-        .subscribe((session) => {
-          this.currentSession = session;
+  public get performers(): Performer[] {
+    return this.currentSession.performers;
+  }
 
-          this.performersService.listPerformers(session.sessionId)
-            .subscribe((performers) => {
-              this.performers = performers;
+  refresh(sessionId: Number) {
+    this.sessionsService.get(sessionId)
+      .subscribe(session => {
+        this.currentSession = session;
 
-              if (session.currentPos != null) {
-                this.currentPerformer = this.performers[session.currentPos];
-              } else {
-                this.currentPerformer = EmptyPerformer;
-              }
+        if (session.currentPos != null) {
+          this.currentPerformer = this.performers[session.currentPos];
+        }
 
-              if (autoRefreshSec) {
-                setInterval((() => { 
-                  this.refresh(autoRefreshSec); }), autoRefreshSec);
-              }
-            });
-        });
-    }
+        setTimeout(() => { this.refresh(sessionId); }, this.autoRefreshMs);
+      });
   }
 
   public get nextPerformer(): Performer | null {

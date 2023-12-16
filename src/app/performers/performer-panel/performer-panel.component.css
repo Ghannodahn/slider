@@ -13,6 +13,14 @@
   overflow-y: auto;
 }
 
+.section-body > table {
+  width: 100%
+}
+
+tr.selected {
+  background-color: cornflowerblue;
+}
+
 .performer-header {
   flex-grow: None;
   padding: 8px;
@@ -37,20 +45,17 @@
   font-weight: normal;
 }
 
-.performer-edit-button {
+.performer-entry > button {
   margin-top: 8px;
+  margin-right: 4px;
 }
 
 .performer-selected {
+  color: white;
   font-weight: bold;
-  background-color: cornflowerblue;
 }
 
 .performer-add-button {
   margin: 8px;
   width: -webkit-fill-available;
-}
-
-.performer-selected > button {
-  margin-right: 8px;
 }

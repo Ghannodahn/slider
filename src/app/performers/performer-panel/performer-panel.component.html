@@ -3,8 +3,10 @@
   <div class="section-body">
    <slider-loading-panel-entry
       *ngIf="stateService.isPerformerLoading"></slider-loading-panel-entry>
-    <table>
-      <tr *ngFor="let performer of stateService.performers; index as ctr">
+    <table cellspacing="0" cellpadding="0">
+      <tr 
+        *ngFor="let performer of stateService.selectedSession.performers; index as ctr"
+        [class.performer-selected]="stateService.selectedPerformer === performer">
         <td>
           <input type="radio"
             [(ngModel)]="stateService.selectedSession.currentPos"
@@ -25,22 +27,9 @@
             {{ performer.displayName }}
           </div>
           <div
-            class="performer-selected performer-entry" 
+            class="performer-entry" 
             *ngIf="!isEditing && stateService.selectedPerformer === performer">
             <div class="performer-attribute">{{ performer.displayName }}</div>
-            <div 
-              *ngIf="stateService.selectedPerformer.socialIg"
-              class="performer-attribute">
-              &#64;{{ performer.socialIg }}
-            </div>
-            <div 
-              *ngIf="stateService.selectedPerformer.link"
-              class="performer-attribute">
-              <a 
-                [href]="stateService.selectedPerformer.link"
-                target="_blank">
-                {{ performer.link }}</a>
-            </div>
             <button
               class="performer-edit-button"
               (click)="onClickEditPerformer(performer)">Edit</button>
@@ -50,7 +39,7 @@
               (click)="onClickMoveUp(performer)">Up</button>
             <button
               class="performer-moveup-button"
-              *ngIf="ctr < stateService.performers.length - 1"
+              *ngIf="ctr < stateService.selectedSession.performers.length - 1"
               (click)="onClickMoveDown(performer)">Down</button>
             <button
               class="performer-delete-button"
