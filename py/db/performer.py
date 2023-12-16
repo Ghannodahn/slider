@@ -50,8 +50,12 @@ class Performer:
     sql = CREATE_SQL.format(sessionId, displayName, sessionPos, link, socialIg)
 
     with self.db.connect() as conn:
-      conn.execute(sqlalchemy.text(sql))
+      rows = conn.execute(
+        sqlalchemy.text(sql)
+      ).fetchall()
       conn.commit()
+      result = {'id': rows[0][0]}
+      return result
   
   def edit(self, performerId, displayName, sessionPos, link, socialIg, **args):
     sql = EDIT_SQL.format(performerId, displayName, sessionPos, link, socialIg)
@@ -97,7 +101,8 @@ LIST_SQL = """
 CREATE_SQL = """
   INSERT INTO 
     performer (sessionId, displayName, sessionPos, link, socialIg) 
-    VALUES ({0}, '{1}', {2}, '{3}', '{4}');
+    VALUES ({0}, '{1}', {2}, '{3}', '{4}')
+    RETURNING performerId;
   """
 
 EDIT_SQL = """

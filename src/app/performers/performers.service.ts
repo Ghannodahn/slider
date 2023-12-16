@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { Performer } from './performer';
+import { NewId } from '../data/data';
 
 export interface PerformerReorderRequest {
   id: Number,
@@ -21,12 +22,12 @@ export class PerformersService {
     return this.http.get<Performer[]>(url);
   }
 
-  addPerformer(performer: Performer): Observable<object> {
+  addPerformer(performer: Performer): Observable<NewId> {
     var url = "data/performer/create";
 
     var options = { params: performer };
 
-    return this.http.put(url, options);
+    return this.http.put<NewId>(url, options);
   }
 
   editPerformer(performer: Performer): Observable<object> {

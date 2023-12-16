@@ -75,11 +75,13 @@ export class SessionManagerStateService {
 
   public addPerformer(session: Session, performer: Performer) {
     this.isPerformerLoading = true;
+    session.performers.push(performer);
     this.dirtyPerformer = newPerformer();
 
     this.performersService.addPerformer(performer)
-      .subscribe(() => {
-        this.refreshSession(session);
+      .subscribe((newId) => {
+        performer.performerId = newId.id;
+        this.isPerformerLoading = false;
       });
   }
 
