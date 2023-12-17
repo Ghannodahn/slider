@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { LoadingPanelEntryComponent } from '../../loading-panel-entry/loading-panel-entry.component';
 import { EmptyPerformer, Performer, newPerformer } from '../performer';
-import { PerformerNewPanelComponent } from '../performer-edit-panel/performer-edit-panel.component';
+import { PerformerEditPanelComponent } from '../performer-edit-panel/performer-edit-panel.component';
 import { SessionManagerStateService } from '../../session-manager/session-manager-state.service';
 
 @Component({
@@ -14,7 +14,7 @@ import { SessionManagerStateService } from '../../session-manager/session-manage
     CommonModule,
     FormsModule,
     LoadingPanelEntryComponent,
-    PerformerNewPanelComponent,
+    PerformerEditPanelComponent,
   ],
   templateUrl: './performer-panel.component.html',
   styleUrl: './performer-panel.component.css'
@@ -34,7 +34,7 @@ export class PerformerPanelComponent {
 
   get isFirstSelected(): boolean {
     var selectedPerformer = this.stateService.selectedPerformer;
-    var performers = this.stateService.selectedSession.performers;
+    var performers = this.stateService.selectedSession!.performers;
 
     if (!selectedPerformer) { return false; }
     
@@ -43,7 +43,7 @@ export class PerformerPanelComponent {
 
   get isLastSelected(): boolean {
     var selectedPerformer = this.stateService.selectedPerformer;
-    var performers = this.stateService.selectedSession.performers;
+    var performers = this.stateService.selectedSession!.performers;
 
     if (!selectedPerformer) { return false; }
     
@@ -51,7 +51,7 @@ export class PerformerPanelComponent {
   }
 
   cancelEdit() {
-    this.stateService.cancelEdit();
+    this.stateService.cancelEditPerformer();
     this.isEditing = false;
   }
 
@@ -83,52 +83,52 @@ export class PerformerPanelComponent {
   }
 
   onClickAddPerformer() {
-    this.stateService.dirtyPerformer.sessionId = this.stateService.selectedSession.sessionId;
-    this.stateService.dirtyPerformer.sessionPos = this.stateService.getNextSessionPos(this.stateService.selectedSession);
+    this.stateService.dirtyPerformer.sessionId = this.stateService.selectedSession!.sessionId;
+    this.stateService.dirtyPerformer.sessionPos = this.stateService.getNextSessionPos(this.stateService.selectedSession!);
   
     this.isAdding = true;
   }
 
   onClickSubmitAddPerformer(performer: Performer) {
     this.isAdding = false;
-    this.stateService.addPerformer(this.stateService.selectedSession, performer);
+    this.stateService.addPerformer(this.stateService.selectedSession!, performer);
   }
 
   onClickMoveUp(performer: Performer) {
-    var currentIdx = this.stateService.selectedSession.performers.indexOf(performer);
+    var currentIdx = this.stateService.selectedSession!.performers.indexOf(performer);
     if (currentIdx == 0) {
       throw "Target performer is first in the list and cannot be moved up.";
     }
 
     var previousIdx = currentIdx - 1;
-    var previousPerformer = this.stateService.selectedSession.performers[previousIdx];
-    this.stateService.selectedSession.performers.splice(
+    var previousPerformer = this.stateService.selectedSession!.performers[previousIdx];
+    this.stateService.selectedSession!.performers.splice(
       previousIdx, 2, performer, previousPerformer);
 
-    this.stateService.reorderPerformers(this.stateService.selectedSession);
+    this.stateService.reorderPerformers(this.stateService.selectedSession!);
   }
 
   onClickMoveDown(performer: Performer) {
-    var currentIdx = this.stateService.selectedSession.performers.indexOf(performer);
-    if (currentIdx >= this.stateService.selectedSession.performers.length - 1) {
+    var currentIdx = this.stateService.selectedSession!.performers.indexOf(performer);
+    if (currentIdx >= this.stateService.selectedSession!.performers.length - 1) {
       throw "Target performer is last in the list and cannot be moved down.";
     }
 
     var nextIdx = currentIdx + 1;
-    var nextPerformer = this.stateService.selectedSession.performers[nextIdx];
-    this.stateService.selectedSession.performers.splice(
+    var nextPerformer = this.stateService.selectedSession!.performers[nextIdx];
+    this.stateService.selectedSession!.performers.splice(
       currentIdx, 2, nextPerformer, performer);
       
-    this.stateService.reorderPerformers(this.stateService.selectedSession);
+    this.stateService.reorderPerformers(this.stateService.selectedSession!);
   }
 
   onClickDelete(performer: Performer) {
     if (window.confirm("Are you sure you want to delete this performer?  Click OK to confirm.")) {
-      this.stateService.deletePerformer(this.stateService.selectedSession, performer);
+      this.stateService.deletePerformer(this.stateService.selectedSession!, performer);
     }
   }
 
   onCurrentPosChange(newPos: Number) {
-    this.stateService.updateSession(this.stateService.selectedSession);
+    this.stateService.editSession(this.stateService.selectedSession!);
   }
 }

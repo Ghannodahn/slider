@@ -32,11 +32,11 @@
       *ngIf="stateService.isPerformerLoading"></slider-loading-panel-entry>
     <table cellspacing="0" cellpadding="0">
       <tr 
-        *ngFor="let performer of stateService.selectedSession.performers; index as ctr"
+        *ngFor="let performer of stateService.selectedSession!.performers; index as ctr"
         [class.performer-selected]="stateService.selectedPerformer === performer">
         <td class="selector">
           <input type="radio"
-            [(ngModel)]="stateService.selectedSession.currentPos"
+            [(ngModel)]="stateService.selectedSession!.currentPos"
             (change)="onCurrentPosChange(ctr)"
             [value]="ctr">
         </td>

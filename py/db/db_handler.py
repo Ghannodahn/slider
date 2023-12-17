@@ -27,8 +27,6 @@ class DbHandler:
 
       if operation == "reorder":
         return handler.reorder(**args)
-      elif operation == "delete":
-        return handler.delete(**args)
     else:
       raise Exception("Request failed: Entity {0} does not exist.".format(entity))
 
@@ -40,6 +38,8 @@ class DbHandler:
       return handler.create(**args)
     elif operation == "edit":
       return handler.edit(**args)
+    elif operation == "delete":
+      return handler.delete(**args)
     else:
       raise Exception(
         "Request failed: Operation {0} is unsupported on entity {1}."

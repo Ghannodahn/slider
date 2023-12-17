@@ -98,9 +98,9 @@ class Session:
         sessionId = {0};
     """.format(
       sessionId,
-      startTime,
-      endTime,
-      currentPos
+      startTime.format("%Y-%m-%d %H:%M:%S"),
+      endTime.format("%Y-%m-%d %H:%M:%S"),
+      currentPos or "NULL"
     )
 
     logging.warning(sql)
@@ -110,3 +110,37 @@ class Session:
       conn.commit()
     
     return []
+
+  def create(self, startTime, endTime, currentPos, **args):
+    sql = """
+      INSERT INTO EventSession (
+        startTime, endTime, currentPos) 
+      VALUES ('{0}', '{1}', {2})
+      RETURNING sessionId;
+      """.format(
+        startTime.format("%Y-%m-%d %H:%M:%S"),
+        endTime.format("%Y-%m-%d %H:%M:%S"),
+        currentPos or "NULL"
+      )
+
+    with self.db.connect() as conn:
+      rows = conn.execute(
+        sqlalchemy.text(sql)
+      ).fetchall()
+      conn.commit()
+      result = {'id': rows[0][0]}
+      return result
+  
+  def delete(self, sessionId, **args):
+    sql = """
+      DO $$
+      BEGIN
+        DELETE FROM Performer WHERE sessionId = {0};
+        DELETE FROM EventSession WHERE sessionId = {0};
+      END
+      $$;
+    """.format(sessionId)
+
+    with self.db.connect() as conn:
+      conn.execute(sqlalchemy.text(sql))
+      conn.commit()

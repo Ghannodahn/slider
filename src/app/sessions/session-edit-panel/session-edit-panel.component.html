@@ -1,0 +1,15 @@
+<div
+  class="performer-new-panel">
+  <div class="input-row">
+    <input type="datetime" [(ngModel)]="session!.startTime" #ctrl="ngModel">
+    <label>Start Time</label>
+  </div>
+  <div class="input-row">
+    <input type="datetime" [(ngModel)]="session!.endTime" #ctrl="ngModel">
+    <label>End Time</label>
+  </div>
+  <div class="button-row">
+    <button (click)="onClickSubmit()">Save</button>
+    <button (click)="onClickCancel()">Cancel</button>
+  </div>
+</div>

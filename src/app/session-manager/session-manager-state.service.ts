@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Session, EmptySession } from '../sessions/session';
+import { Session, EmptySession, newSession } from '../sessions/session';
 import { Performer, EmptyPerformer, newPerformer } from '../performers/performer'
 import { SessionsService } from '../sessions/sessions.service';
 import { PerformersService } from '../performers/performers.service';
@@ -9,7 +9,8 @@ import { PerformersService } from '../performers/performers.service';
 })
 export class SessionManagerStateService {
   sessions: Session[] = [];
-  selectedSession: Session = EmptySession;
+  dirtySession: Session = newSession();
+  selectedSession?: Session;
   isSessionLoading: boolean = false;
 
   dirtyPerformer: Performer = newPerformer();
@@ -38,7 +39,8 @@ export class SessionManagerStateService {
       .subscribe(updatedSession => {
         this.sessions[this.sessions.indexOf(session)] = updatedSession;
         
-        if (updatedSession.sessionId === this.selectedSession.sessionId) {
+        if (this.selectedSession && 
+            updatedSession.sessionId === this.selectedSession.sessionId) {
           this.selectedSession = updatedSession;
         }
 
@@ -54,7 +56,7 @@ export class SessionManagerStateService {
     return (this.selectedPerformer !== EmptyPerformer);
   }
 
-  public cancelEdit() {
+  public cancelEditPerformer() {
     this.selectedPerformer.displayName = this.performerSnapshot.displayName;
     this.selectedPerformer.sessionPos = this.performerSnapshot.sessionPos;
     this.selectedPerformer.link = this.performerSnapshot.link;
@@ -71,6 +73,18 @@ export class SessionManagerStateService {
     });
 
     return ++lastPos;
+  }
+
+  public addSession(session: Session) {
+    this.isSessionLoading = true;
+    this.sessions.push(session);
+    this.dirtySession = newSession();
+
+    this.sessionsService.create(session)
+      .subscribe((newId) => {
+        session.sessionId = newId.id;
+        this.isSessionLoading = false;
+      });
   }
 
   public addPerformer(session: Session, performer: Performer) {
@@ -132,8 +146,20 @@ export class SessionManagerStateService {
     }
   }
 
-  public updateSession(session: Session) {
+  public editSession(session: Session) {
     this.sessionsService.update(session)
       .subscribe(() => { });
+  }
+  
+  public deleteSession(session: Session) {
+    let selectedIndex = this.sessions.indexOf(session);
+    this.sessions.splice(selectedIndex, 1);
+    this.selectedPerformer = EmptyPerformer;
+
+    this.sessionsService.update(session)
+      .subscribe(() => {         
+        this.sessionsService.delete(session)
+          .subscribe(() => { });
+      });
   }
 }

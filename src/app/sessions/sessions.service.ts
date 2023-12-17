@@ -5,6 +5,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { Observable, catchError, map } from 'rxjs';
 
 import { Session } from './session';
+import { NewId } from '../data/data';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -30,6 +31,14 @@ export class SessionsService {
     return this.http.get<Session>(url);
   }
 
+  create(session: Session): Observable<NewId> {
+    var url = "data/session/create";
+
+    var options = { params: session };
+
+    return this.http.put<NewId>(url, options);
+  }
+
   update(session: Session): Observable<object> {
     var url = "data/session/edit"
     var options = {params: {
@@ -38,6 +47,14 @@ export class SessionsService {
       endTime: session.endTime,
       currentPos: session.currentPos
     }};
+
+    return this.http.put(url, options);
+  }
+  
+  delete(session: Session): Observable<object> {
+    var url = "data/session/delete";
+
+    var options = { params: session };
 
     return this.http.put(url, options);
   }

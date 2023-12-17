@@ -1,11 +1,41 @@
 <div class="session-section">
   <div class="session-header">Sessions</div>
+  <div class="session-toolbar">
+    <button
+      (click)="onClickAddSession()">
+      <object data="/assets/buttons/add.svg"></object>
+    </button>
+    <button
+      [disabled]="!stateService.selectedSession"
+      (click)="onClickEditSession(stateService.selectedSession!)">
+      <object data="/assets/buttons/edit.svg"></object>
+    </button>
+    <button
+      [disabled]="!stateService.selectedSession"
+      (click)="onClickDeleteSession(stateService.selectedSession!)">
+      <object data="/assets/buttons/delete.svg"></object>
+    </button>
+  </div>
   <slider-loading-panel-entry
     *ngIf="stateService.isSessionLoading"></slider-loading-panel-entry>
   <div 
-    *ngFor="let session of stateService.sessions" 
-    class="session-entry"
-    [class.session-selected]="stateService.selectedSession === session"
-    (click)="onClickSession(session)">
-    {{ session.startTime | date:'y-MM-dd' }}</div>
+    *ngFor="let session of stateService.sessions">
+    <div  
+      class="session-entry"
+      [class.session-selected]="stateService.selectedSession === session"
+      (click)="onClickSession(session)">
+      {{ session.startTime | date:'y-MM-dd' }}</div>
+    <slider-session-edit-panel
+      *ngIf="isEditing && stateService.selectedSession === session"
+      [session]="session"
+      (submit)="onClickSubmitEditSession(session)"
+      (cancel)="onClickCancelEditSession()">
+    </slider-session-edit-panel>
+    </div>
+  <slider-session-edit-panel
+    *ngIf="isAdding"
+    [session]="stateService.dirtySession"
+    (submit)="onClickSubmitAddSession(stateService.dirtySession)"
+    (cancel)="onClickCancelAddSession()">
+  </slider-session-edit-panel>
 </div>

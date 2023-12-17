@@ -1,3 +1,7 @@
+object {
+  pointer-events: none;
+}
+
 .session-section {
   height: -webkit-fill-available;
   width: -webkit-fill-available;
@@ -14,6 +18,41 @@
   padding: 8px;
   font-weight: bold;
   border-bottom: 1px solid cornflowerblue;
+}
+
+.session-toolbar {
+  border-bottom: 1px solid cornflowerblue;
+  background-color: #cfe2f3;
+  height: 35px;
+  padding: 4px;
+}
+
+.session-toolbar > button {
+  padding: 0;
+  background-color: #1155cc;
+  border: 1px solid #1155cc;
+  border-radius: 2px;
+  height: 26px;
+  width: 26px;
+  margin-right: 4px;
+}
+
+.session-toolbar > button:disabled {
+  padding: 0;
+  background-color: #cfe2f3;
+  border: 1px solid #cfe2f3;
+  border-radius: 2px;
+  height: 26px;
+  width: 26px;
+  margin-right: 4px;
+  cursor: default;
+}
+
+.session-toolbar > button:hover:not(:disabled) {
+  padding: 0;
+  background-color: #1c4587;
+  border: 1px solid #1c4587;;
+  border-radius: 2px;
 }
 
 .session-entry {

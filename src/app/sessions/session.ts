@@ -8,10 +8,14 @@ export interface Session {
   performers: Performer[];
 }
 
-export var EmptySession: Session = {
-  sessionId: 0,
-  startTime: new Date(),
-  endTime: new Date(),
-  currentPos: null,
-  performers: []
+export var EmptySession = newSession();
+
+export function newSession(): Session {
+  return {
+    sessionId: 0,
+    startTime: new Date(),
+    endTime: new Date(),
+    currentPos: null,
+    performers: []
+  }
 }

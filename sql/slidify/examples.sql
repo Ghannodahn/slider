@@ -15,3 +15,11 @@ BEGIN
   SELECT sessionId;
 END 
 $$;
+
+/* Delete Session and associated Performers */
+DO $$
+BEGIN
+DELETE FROM Performer WHERE sessionId = 1;
+DELETE FROM EventSession WHERE sessionId = 1;
+END
+$$;
