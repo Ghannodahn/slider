@@ -89,6 +89,9 @@ class Session:
     return result
   
   def edit(self, sessionId, startTime, endTime, currentPos):
+    if (currentPos == None):
+      currentPos = "NULL"
+
     sql = """
       UPDATE EventSession SET
         startTime = '{1}',
@@ -100,7 +103,7 @@ class Session:
       sessionId,
       startTime.format("%Y-%m-%d %H:%M:%S"),
       endTime.format("%Y-%m-%d %H:%M:%S"),
-      currentPos or "NULL"
+      currentPos
     )
 
     logging.warning(sql)
@@ -112,6 +115,9 @@ class Session:
     return []
 
   def create(self, startTime, endTime, currentPos, **args):
+    if (currentPos == None):
+      currentPos = "NULL"
+      
     sql = """
       INSERT INTO EventSession (
         startTime, endTime, currentPos) 
@@ -120,7 +126,7 @@ class Session:
       """.format(
         startTime.format("%Y-%m-%d %H:%M:%S"),
         endTime.format("%Y-%m-%d %H:%M:%S"),
-        currentPos or "NULL"
+        currentPos
       )
 
     with self.db.connect() as conn:
