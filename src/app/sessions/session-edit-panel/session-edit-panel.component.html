@@ -1,11 +1,17 @@
 <div
   class="performer-new-panel">
   <div class="input-row">
-    <input type="datetime" [(ngModel)]="session!.startTime" #ctrl="ngModel">
+    <input type="datetime" 
+      [ngModel]="session!.startTime | date:'yyyy-MM-dd HH:MM:SS'" 
+      (ngModelChange)="session!.startTime=$event"
+      #ctrl="ngModel">
     <label>Start Time</label>
   </div>
   <div class="input-row">
-    <input type="datetime" [(ngModel)]="session!.endTime" #ctrl="ngModel">
+    <input type="datetime"
+      [ngModel]="session!.endTime | date:'yyyy-MM-dd HH:MM:SS'" 
+      (ngModelChange)="session!.endTime=$event"
+      #ctrl="ngModel">
     <label>End Time</label>
   </div>
   <div class="button-row">

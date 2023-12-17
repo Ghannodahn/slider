@@ -1,0 +1,32 @@
+.canvas {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+}
+
+.canvas > span {
+  margin-right: 6px;
+}
+
+.canvas > input[type='color'] {
+  width: 23px;
+  margin-right: 6px;
+}
+
+.canvas > input[type='number'] {
+  height: 27px;
+  margin-right: 6px;
+  width: 50px;
+  text-align: right;
+}
+
+.canvas > input::-webkit-outer-spin-button, 
+.canvas > input::-webkit-inner-spin-button { 
+  margin-left: 4px; 
+} 
+
+.canvas > select {
+  height: 27px;
+  margin-right: 6px;
+  width: 180px;
+}

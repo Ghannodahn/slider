@@ -71,6 +71,7 @@ object {
 }
 
 .session-selected {
+  color: white;
   font-weight: bold;
-  background-color: cornflowerblue;
+  background-color: #1c4587;
 }

@@ -1,13 +1,21 @@
 <div class="canvas">
   <div class="preview-header"
     *ngIf="showHeader">Preview</div>
+  <div class="preview-toolbar"
+    *ngIf="showHeader">
+    <slider-show-style-toolbar [showStyle]="currentStyle"></slider-show-style-toolbar>
+  </div>
   <div class="preview-placeholder"
     *ngIf="!performer.performerId">
     <div>Select a <b>Performer</b> to see details</div>
   </div>
-  <div class="preview-section"
+  <div class="preview-section" 
+    [style.backgroundColor]="currentStyle.backgroundColor"
+    [style.color]="currentStyle.textColor"
     *ngIf="performer.performerId">
-    <div class="display-name">
+    <div class="display-name"
+      [style.fontFamily]="currentStyle.fontName"
+      [style.fontSize.cqw]="currentStyle.fontSize">
       {{ performer.displayName }}
     </div>
     <div class="link" *ngIf="performer.link">

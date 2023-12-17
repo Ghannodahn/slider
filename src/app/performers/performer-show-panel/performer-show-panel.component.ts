@@ -1,16 +1,24 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { Performer, EmptyPerformer } from '../performer';
+import { ShowStyleToolbarComponent } from '../../show/show-style-toolbar/show-style-toolbar.component'
+import { EmptyShowStyle, ShowStyle, newShowStyle } from '../../show/show-style';
 
 @Component({
   selector: 'slider-performer-show-panel',
   standalone: true,
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    ShowStyleToolbarComponent
+  ],
   templateUrl: './performer-show-panel.component.html',
   styleUrl: './performer-show-panel.component.css'
 })
 export class PerformerShowPanelComponent {
   constructor () {}
+
+  @Input()
+  currentStyle: ShowStyle = EmptyShowStyle;
 
   @Input()
   performer: Performer = EmptyPerformer;
