@@ -1,3 +1,5 @@
+import { ShowStyle } from "../show/show-style";
+
 export interface Performer {
   performerId: number;
   sessionId: number;
@@ -5,6 +7,7 @@ export interface Performer {
   link: string;
   socialIg: string;
   sessionPos: number;
+  customStyle: ShowStyle | null;
 }
 
 export var EmptyPerformer: Performer = newPerformer();
@@ -16,6 +19,7 @@ export function newPerformer() {
     displayName: "EMPTY",
     link: "",
     socialIg: "",
-    sessionPos: 0
+    sessionPos: 0,
+    customStyle: null
   }
 }

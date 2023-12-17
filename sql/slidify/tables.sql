@@ -13,14 +13,15 @@ INSERT INTO EventSession (startTime, endTime, currentPos)
 
 DROP TABLE IF EXISTS performer;
 CREATE TABLE performer (
-  performerId    SERIAL PRIMARY KEY,
+  performerId SERIAL PRIMARY KEY,
   sessionId   SERIAL,
   displayName VARCHAR(50),
   socialIg    VARCHAR(50),
   link        VARCHAR(50),
   sessionPos  INTEGER,
   isActive    BOOLEAN DEFAULT FALSE,
-  isComplete  BOOLEAN DEFAULT FALSE
+  isComplete  BOOLEAN DEFAULT FALSE,
+  customStyle JSON
 );
 
 INSERT INTO 
@@ -33,8 +34,9 @@ INSERT INTO
   performer (sessionId, displayName, sessionPos) 
   VALUES (1, 'Greener Mind', 2);
 INSERT INTO 
-  performer (sessionId, displayName, socialIg, link, sessionPos) 
-  VALUES (1, 'Joe Allan Muharsky', 'bassicNerd', 'bassicnerd.com', 5);
+  performer (sessionId, displayName, socialIg, link, sessionPos, customStyle) 
+  VALUES (1, 'Joe Allan Muharsky', 'bassicNerd', 'bassicnerd.com', 5,
+    '{"backgroundColor": "#20124D", "fontSize": 8}');
 INSERT INTO 
   performer (sessionId, displayName, sessionPos) 
   VALUES (1, 'Heather Wonders', 4);
@@ -50,8 +52,9 @@ INSERT INTO
   performer (sessionId, displayName, sessionPos) 
   VALUES (2, 'Javier', 4);
 INSERT INTO 
-  performer (sessionId, displayName, socialIg, link, sessionPos) 
-  VALUES (2, 'Joe Allan Muharsky', 'bassicNerd', 'bassicnerd.com', 1);
+  performer (sessionId, displayName, socialIg, link, sessionPos, customStyle) 
+  VALUES (2, 'Joe Allan Muharsky', 'bassicNerd', 'bassicnerd.com', 5,
+    '{"backgroundColor": "#20124D", "fontSize": 9}');
 INSERT INTO 
   performer (sessionId, displayName, sessionPos) 
   VALUES (2, 'Andrew Lee Mason', 5);

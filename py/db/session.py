@@ -19,7 +19,8 @@ class Session:
                   'sessionPos', p.sessionPos,
                   'displayName', p.displayName,
                   'link', p.link,
-                  'socialIg', p.socialIg) 
+                  'socialIg', p.socialIg,
+                  'customStyle', p.customStyle) 
               FROM Performer p 
               WHERE p.sessionId = s.sessionId 
               ORDER BY p.sessionPos
@@ -58,7 +59,8 @@ class Session:
                 'sessionPos', p.sessionPos,
                 'displayName', p.displayName,
                 'link', p.link,
-                'socialIg', p.socialIg) 
+                'socialIg', p.socialIg,
+                'customStyle', p.customStyle) 
             FROM Performer p 
             WHERE p.sessionId = s.sessionId 
             ORDER BY p.sessionPos
@@ -121,7 +123,7 @@ class Session:
     sql = """
       INSERT INTO EventSession (
         startTime, endTime, currentPos) 
-      VALUES ('{0}', '{1}', {2})
+      VALUES ("{0}", "{1}", {2})
       RETURNING sessionId;
       """.format(
         startTime.format("%Y-%m-%d %H:%M:%S"),

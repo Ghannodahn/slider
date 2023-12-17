@@ -24,27 +24,32 @@
 }
 
 .preview-toolbar > button {
-  padding: 0;
   background-color: #1155cc;
   border: 1px solid #1155cc;
   border-radius: 2px;
-  height: 26px;
-  width: 26px;
+  color: white;
   margin-right: 4px;
 }
 
 .preview-toolbar > button:disabled {
-  padding: 0;
   background-color: #cfe2f3;
   border: 1px solid #cfe2f3;
-  border-radius: 2px;
-  height: 26px;
-  width: 26px;
-  margin-right: 4px;
   cursor: default;
 }
 
-.preview-toolbar > button:hover:not(:disabled) {
+.preview-toolbar > .action-button {
+  padding-top: 0;
+  padding-bottom: 0;
+  height: 26px;  
+}
+
+.preview-toolbar > .toolbar-button {
+  padding: 0;
+  height: 26px;
+  width: 26px;
+}
+
+.preview-toolbar > .toolbar-button:hover:not(:disabled) {
   padding: 0;
   background-color: #1c4587;
   border: 1px solid #1c4587;;
@@ -86,9 +91,8 @@
 }
 
 .preview-section > div {
-  padding-top: 20px;
-  padding-bottom: 20px; 
-  text-wrap: nowrap; 
+  padding-top: 12px;
+  padding-bottom: 12px; 
 }
 
 .display-name {

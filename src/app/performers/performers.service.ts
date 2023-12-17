@@ -38,6 +38,14 @@ export class PerformersService {
     return this.http.put(url, options);
   }
 
+  restylePerformer(performer: Performer): Observable<object> {
+    var url = "data/performer/restyle";
+
+    var options = { params: { performerId: performer.performerId, customStyle: performer.customStyle } };
+
+    return this.http.put(url, options);
+  }
+
   reorderPerformers(performers: Performer[]): Observable<object> {
     var url = "data/performer/reorder";
     var newOrder: PerformerReorderRequest[] = [];

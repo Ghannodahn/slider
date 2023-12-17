@@ -3,7 +3,14 @@
     *ngIf="showHeader">Preview</div>
   <div class="preview-toolbar"
     *ngIf="showHeader">
-    <slider-show-style-toolbar [showStyle]="currentStyle"></slider-show-style-toolbar>
+    <button
+      [disabled]="!performer.performerId"
+      class="action-button"
+      *ngIf="!performer.customStyle"
+      (click)="customizeStyle()">Customize Style</button>
+    <slider-show-style-toolbar 
+      *ngIf="performer.customStyle"
+      [showStyle]="currentStyle" (change)="onStyleChange()"></slider-show-style-toolbar>
   </div>
   <div class="preview-placeholder"
     *ngIf="!performer.performerId">

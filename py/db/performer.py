@@ -1,4 +1,5 @@
 import logging
+import simplejson as json
 import sqlalchemy
 
 class Performer:
@@ -22,7 +23,8 @@ class Performer:
         "displayName": row[2], 
         "link": row[3],
         "socialIg": row[4],
-        "sessionPos": row[5]})
+        "sessionPos": row[5],
+        "customStyle": row[6]})
 
     return result
 
@@ -42,7 +44,8 @@ class Performer:
       "displayName": row[2], 
       "link": row[3],
       "socialIg": row[4],
-      "sessionPos": row[5]}
+      "sessionPos": row[5],
+      "customStyle": row[6]}
 
     return result
 
@@ -64,9 +67,14 @@ class Performer:
       conn.execute(sqlalchemy.text(sql))
       conn.commit()
   
+  def restyle(self, performerId, customStyle, **args):
+    sql = RESTYLE_SQL.format(performerId, json.dumps(customStyle))
+
+    with self.db.connect() as conn:
+      conn.execute(sqlalchemy.text(sql))
+      conn.commit()
+
   def reorder(self, newOrder):
-    logging.warning("reorder")
-    logging.warning(newOrder)
     ids = [performer['id'] for performer in newOrder]
     pos = [performer['pos'] for performer in newOrder]
     sql = ORDER_SQL.format(
@@ -89,7 +97,7 @@ class Performer:
 
 LIST_SQL = """
   SELECT
-    performerId, sessionId, displayName, link, socialIg, sessionPos
+    performerId, sessionId, displayName, link, socialIg, sessionPos, customStyle
   FROM
     performer
   WHERE
@@ -110,7 +118,15 @@ EDIT_SQL = """
     displayName = '{1}',
     sessionPos = {2},
     link = '{3}',
-    socialIg = '{4}'
+    socialIg = '{4}',
+    customStyle = '{5}'
+  WHERE
+    performerId = {0};  
+  """
+
+RESTYLE_SQL = """
+  UPDATE performer SET
+    customStyle = '{1}'
   WHERE
     performerId = {0};  
   """
@@ -132,12 +148,7 @@ WHERE performerId = {0};
 
 GET_SQL = """
 SELECT
-  performerId,
-  sessionId,
-  displayName,
-  link,
-  socialIG,
-  sessionPos
+  performerId, sessionId, displayName, link, socialIG, sessionPos, customStyle
 FROM
   performer
 WHERE

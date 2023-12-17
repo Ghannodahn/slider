@@ -12,6 +12,4 @@ import { EmptyShowStyle, ShowStyle } from '../show-style';
 export class ShowStyleToolbarComponent {
   @Input()
   showStyle: ShowStyle = EmptyShowStyle;
-
-
 }

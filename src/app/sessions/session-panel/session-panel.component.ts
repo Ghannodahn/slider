@@ -27,11 +27,6 @@ export class SessionPanelComponent {
     public stateService: SessionManagerStateService,
     private sessionsService: SessionsService
   ) {}
-
-  private getSessions() {
-    this.sessionsService.list()
-      .subscribe(sessions => this.stateService.sessions = sessions)
-  }
   
   onClickSession(session: Session) {
     if (this.stateService.selectedSession === session) {

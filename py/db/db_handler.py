@@ -27,6 +27,8 @@ class DbHandler:
 
       if operation == "reorder":
         return handler.reorder(**args)
+      elif operation == "restyle":
+        return handler.restyle(**args)
     else:
       raise Exception("Request failed: Entity {0} does not exist.".format(entity))
 

@@ -3,6 +3,7 @@ import { Component, Input } from '@angular/core';
 import { Performer, EmptyPerformer } from '../performer';
 import { ShowStyleToolbarComponent } from '../../show/show-style-toolbar/show-style-toolbar.component'
 import { EmptyShowStyle, ShowStyle, newShowStyle } from '../../show/show-style';
+import { PerformersService } from '../performers.service';
 
 @Component({
   selector: 'slider-performer-show-panel',
@@ -15,10 +16,13 @@ import { EmptyShowStyle, ShowStyle, newShowStyle } from '../../show/show-style';
   styleUrl: './performer-show-panel.component.css'
 })
 export class PerformerShowPanelComponent {
-  constructor () {}
+  constructor (
+    private performersService: PerformersService
+  ) {}
 
-  @Input()
-  currentStyle: ShowStyle = EmptyShowStyle;
+  get currentStyle(): ShowStyle {
+    return this.performer.customStyle || EmptyShowStyle;
+  }
 
   @Input()
   performer: Performer = EmptyPerformer;
@@ -29,4 +33,12 @@ export class PerformerShowPanelComponent {
   @Input()
   showHeader: Boolean = true;
 
+  onStyleChange() {
+    this.performersService.restylePerformer(this.performer)
+      .subscribe(() => {});
+  }
+
+  customizeStyle() {
+    this.performer.customStyle = newShowStyle();
+  }
 }
