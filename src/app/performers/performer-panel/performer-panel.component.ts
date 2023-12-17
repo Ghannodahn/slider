@@ -123,7 +123,9 @@ export class PerformerPanelComponent {
   }
 
   onClickDelete(performer: Performer) {
-    this.stateService.deletePerformer(this.stateService.selectedSession, performer);
+    if (window.confirm("Are you sure you want to delete this performer?  Click OK to confirm.")) {
+      this.stateService.deletePerformer(this.stateService.selectedSession, performer);
+    }
   }
 
   onCurrentPosChange(newPos: Number) {
