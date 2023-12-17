@@ -1,12 +1,28 @@
 <div
   class="performer-new-panel">
   <div class="input-row">
-    <input type="datetime" [(ngModel)]="session!.startTime" #ctrl="ngModel">
+    <input type="number" disabled
+      [(ngModel)]="session!.sessionId">
+    <label>ID</label>
+  </div>
+  <div class="input-row">
+    <input type="datetime" 
+      [ngModel]="session!.startTime | date:'yyyy-MM-dd HH:MM'" 
+      (ngModelChange)="session!.startTime=$event"
+      #ctrl="ngModel">
     <label>Start Time</label>
   </div>
   <div class="input-row">
-    <input type="datetime" [(ngModel)]="session!.endTime" #ctrl="ngModel">
+    <input type="datetime"
+      [ngModel]="session!.endTime | date:'yyyy-MM-dd HH:MM'" 
+      (ngModelChange)="session!.endTime=$event"
+      #ctrl="ngModel">
     <label>End Time</label>
+  </div>
+  <div class="input-row">
+    <input type="number"
+      [(ngModel)]="session!.currentPos">
+    <label>Current Position</label>
   </div>
   <div class="button-row">
     <button (click)="onClickSubmit()">Save</button>
