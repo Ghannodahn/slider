@@ -55,12 +55,9 @@ object {
   width: 100%
 }
 
-tr.performer-selected {
-  background-color: cornflowerblue;
-}
-
 td.selector {
   padding-left: 6px;
+  padding-right: 6px;
   text-align: center;
   width: 20px;
 }
@@ -95,8 +92,8 @@ tr:not(.performer-selected):hover {
 }
 
 .performer-selected {
+  background-color: #1c4587;
   color: white;
-  font-weight: bold;
 }
 
 .performer-add-button {

@@ -41,23 +41,17 @@
             [value]="ctr">
         </td>
         <td>
+          <div
+            class="performer-entry"
+            (click)="onClickPerformer(performer)">
+            {{ performer.displayName }}
+          </div>
           <slider-performer-edit-panel
             *ngIf="isEditing && stateService.selectedPerformer === performer"
             [performer]="performer"
             (submit)="onClickSubmitEditPerformer(performer)"
             (cancel)="onClickCancelEditPerformer()">
           </slider-performer-edit-panel>
-          <div
-            class="performer-entry"
-            *ngIf="stateService.selectedPerformer !== performer"
-            (click)="onClickPerformer(performer)">
-            {{ performer.displayName }}
-          </div>
-          <div
-            class="performer-entry" 
-            *ngIf="!isEditing && stateService.selectedPerformer === performer">
-            <div class="performer-attribute">{{ performer.displayName }}</div>
-          </div>
         </td>
       </tr>
     </table>
