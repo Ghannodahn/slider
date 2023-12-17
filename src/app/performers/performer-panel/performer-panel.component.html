@@ -1,5 +1,32 @@
 <div class="performer-section">
   <div class="performer-header">Performers</div>
+  <div class="performer-toolbar">
+    <button 
+      [disabled]="!stateService.isSessionSelected || isAdding || stateService.isPerformerLoading"
+      (click)="onClickAddPerformer()">
+      <object data="/assets/buttons/add.svg"></object>
+    </button>
+    <button
+      [disabled]="!stateService.isPerformerSelected"
+      (click)="onClickEditPerformer(stateService.selectedPerformer)">
+      <object data="/assets/buttons/edit.svg"></object>
+    </button>
+    <button
+      [disabled]="!stateService.isPerformerSelected || isFirstSelected"
+      (click)="onClickMoveUp(stateService.selectedPerformer)">
+      <object data="/assets/buttons/move-up.svg"></object>
+    </button>
+    <button
+      [disabled]="!stateService.isPerformerSelected || isLastSelected"
+      (click)="onClickMoveDown(stateService.selectedPerformer)">
+      <object data="/assets/buttons/move-down.svg"></object>
+    </button>
+    <button
+      [disabled]="!stateService.isPerformerSelected"
+      (click)="onClickDelete(stateService.selectedPerformer)">
+      <object data="/assets/buttons/delete.svg"></object>
+    </button>
+  </div>
   <div class="section-body">
    <slider-loading-panel-entry
       *ngIf="stateService.isPerformerLoading"></slider-loading-panel-entry>
@@ -7,7 +34,7 @@
       <tr 
         *ngFor="let performer of stateService.selectedSession.performers; index as ctr"
         [class.performer-selected]="stateService.selectedPerformer === performer">
-        <td>
+        <td class="selector">
           <input type="radio"
             [(ngModel)]="stateService.selectedSession.currentPos"
             (change)="onCurrentPosChange(ctr)"
@@ -30,28 +57,10 @@
             class="performer-entry" 
             *ngIf="!isEditing && stateService.selectedPerformer === performer">
             <div class="performer-attribute">{{ performer.displayName }}</div>
-            <button
-              class="performer-edit-button"
-              (click)="onClickEditPerformer(performer)">Edit</button>
-            <button
-              class="performer-moveup-button"
-              *ngIf="ctr > 0"
-              (click)="onClickMoveUp(performer)">Up</button>
-            <button
-              class="performer-moveup-button"
-              *ngIf="ctr < stateService.selectedSession.performers.length - 1"
-              (click)="onClickMoveDown(performer)">Down</button>
-            <button
-              class="performer-delete-button"
-              (click)="onClickDelete(performer)">X</button>
           </div>
         </td>
       </tr>
     </table>
-    <button
-      class="performer-add-button"
-      *ngIf="stateService.isSessionSelected && !isAdding && !stateService.isPerformerLoading"
-      (click)="onClickAddPerformer()">Add Performer...</button>
     <slider-performer-edit-panel
       *ngIf="isAdding"
       [performer]="stateService.dirtyPerformer"

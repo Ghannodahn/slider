@@ -32,6 +32,24 @@ export class PerformerPanelComponent {
     this.cancelEdit();
   }
 
+  get isFirstSelected(): boolean {
+    var selectedPerformer = this.stateService.selectedPerformer;
+    var performers = this.stateService.selectedSession.performers;
+
+    if (!selectedPerformer) { return false; }
+    
+    return (performers.indexOf(selectedPerformer) === 0);
+  }
+
+  get isLastSelected(): boolean {
+    var selectedPerformer = this.stateService.selectedPerformer;
+    var performers = this.stateService.selectedSession.performers;
+
+    if (!selectedPerformer) { return false; }
+    
+    return (performers.indexOf(selectedPerformer) === (performers.length - 1));
+  }
+
   cancelEdit() {
     this.stateService.cancelEdit();
     this.isEditing = false;

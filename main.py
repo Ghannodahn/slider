@@ -75,6 +75,27 @@ def return_file(filename):
      
   return result
 
+@app.route("/assets/buttons/<filename>")
+def return_button(filename):
+  fullpath = "static/browser/assets/buttons/{0}".format(filename)
+
+  extension_re = re.search(".*\.(.*)", filename)
+  if extension_re:
+     extension = extension_re.group(1)
+
+     if extension == "svg":
+        file = open(fullpath, "r")
+        result = file.read()
+        return Response(result, mimetype="image/svg+xml")
+     elif extension == "css":
+        file = open(fullpath, "r")
+        result = file.read()
+        return Response(result, mimetype="text/css")
+     else:
+        raise Exception("Extension {0} not supported.".format(extension))
+     
+  return result
+
 # Local Testing Only.
 @app.route("/")
 def show_index():

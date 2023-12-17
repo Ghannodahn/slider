@@ -1,3 +1,6 @@
+object {
+  pointer-events: none;
+}
 
 .performer-section {
   height: 100%;
@@ -5,6 +8,41 @@
 
   display: flex;
   flex-direction: column;
+}
+
+.performer-toolbar {
+  border-bottom: 1px solid cornflowerblue;
+  background-color: #cfe2f3;
+  height: 35px;
+  padding: 4px;
+}
+
+.performer-toolbar > button {
+  padding: 0;
+  background-color: #1155cc;
+  border: 1px solid #1155cc;
+  border-radius: 2px;
+  height: 26px;
+  width: 26px;
+  margin-right: 4px;
+}
+
+.performer-toolbar > button:disabled {
+  padding: 0;
+  background-color: #cfe2f3;
+  border: 1px solid #cfe2f3;
+  border-radius: 2px;
+  height: 26px;
+  width: 26px;
+  margin-right: 4px;
+  cursor: default;
+}
+
+.performer-toolbar > button:hover:not(:disabled) {
+  padding: 0;
+  background-color: #1c4587;
+  border: 1px solid #1c4587;;
+  border-radius: 2px;
 }
 
 .section-body {
@@ -17,8 +55,14 @@
   width: 100%
 }
 
-tr.selected {
+tr.performer-selected {
   background-color: cornflowerblue;
+}
+
+td.selector {
+  padding-left: 6px;
+  text-align: center;
+  width: 20px;
 }
 
 .performer-header {
@@ -36,7 +80,7 @@ tr.selected {
   cursor: pointer;
 }
 
-.performer-entry:hover:not(.performer-selected) {
+tr:not(.performer-selected):hover {
   background-color: #cfe2f3;
 }
 
