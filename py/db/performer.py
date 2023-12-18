@@ -50,7 +50,7 @@ class Performer:
     return result
 
   def create(self, sessionId, displayName, sessionPos, link, socialIg, **args):
-    sql = CREATE_SQL.format(sessionId, displayName, sessionPos, link, socialIg)
+    sql = CREATE_SQL.format(sessionId, displayName, sessionPos, link or 'NULL', socialIg or 'NULL')
 
     with self.db.connect() as conn:
       rows = conn.execute(
@@ -60,8 +60,14 @@ class Performer:
       result = {'id': rows[0][0]}
       return result
   
-  def edit(self, performerId, displayName, sessionPos, link, socialIg, **args):
-    sql = EDIT_SQL.format(performerId, displayName, sessionPos, link, socialIg)
+  def edit(self, performerId, displayName, sessionPos, link, socialIg, customStyle, **args):
+    sql = EDIT_SQL.format(
+      performerId, 
+      displayName, 
+      sessionPos, 
+      link or 'NULL', 
+      socialIg or 'NULL', 
+      json.dumps(customStyle))
 
     with self.db.connect() as conn:
       conn.execute(sqlalchemy.text(sql))
