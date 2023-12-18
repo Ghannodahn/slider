@@ -72,4 +72,8 @@ export class SessionPanelComponent {
       this.stateService.deleteSession(session);
     }
   }
+
+  onClickShowSession(session: Session) {
+    window.open("/show/" + session.sessionId, "_blank");
+  }
 }

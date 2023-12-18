@@ -15,6 +15,11 @@
       (click)="onClickDeleteSession(stateService.selectedSession!)">
       <object data="/assets/buttons/delete.svg"></object>
     </button>
+    <button
+      [disabled]="!stateService.selectedSession"
+      (click)="onClickShowSession(stateService.selectedSession!)">
+      <object data="/assets/buttons/show.svg"></object>
+    </button>
   </div>
   <slider-loading-panel-entry
     *ngIf="stateService.isSessionLoading"></slider-loading-panel-entry>
