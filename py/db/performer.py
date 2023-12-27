@@ -87,7 +87,7 @@ class Performer:
       ", ".join(str(id) for id in ids),
       ", ".join(str(pos) for pos in pos))
 
-    logging.warning(sql)
+    logging.warning('Perfomers > Reorder')
     
     with self.db.connect() as conn:
       conn.execute(sqlalchemy.text(sql))

@@ -4,6 +4,7 @@ from py.db.db_connector import CloudSqlConnector
 
 import logging
 from flask.logging import default_handler
+from logging.config import dictConfig
 
 import sqlalchemy
 
@@ -13,7 +14,7 @@ def init_connection_pool() -> sqlalchemy.engine.base.Engine:
 class DbHandler:
   def __init__(self):
     self.log = logging.getLogger()
-    self.log.addHandler(default_handler)
+
     
     self.db = init_connection_pool()
 

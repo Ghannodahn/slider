@@ -29,7 +29,9 @@ class Session:
       WHERE
         s.sessionId = {0};
     """.format(sessionId)
-    logging.warning(msg=sql)
+
+    logging.info('Session > Get > {0}'.format(sessionId))
+
     with self.db.connect() as conn:
       rows = conn.execute(
               sqlalchemy.text(sql)
@@ -70,7 +72,8 @@ class Session:
       ORDER BY
         s.startTime DESC;
     """
-    logging.warning(sql)
+    logging.info('Session > List')
+
     with self.db.connect() as conn:
       rows = conn.execute(
               sqlalchemy.text(sql)
@@ -108,7 +111,7 @@ class Session:
       currentPos
     )
 
-    logging.warning(sql)
+    logging.info('Sessions > Edit')
 
     with self.db.connect() as conn:
       conn.execute(sqlalchemy.text(sql))
@@ -131,13 +134,17 @@ class Session:
         currentPos
       )
 
+    logging.info('Sessions > Create')
+
     with self.db.connect() as conn:
       rows = conn.execute(
         sqlalchemy.text(sql)
       ).fetchall()
       conn.commit()
-      result = {'id': rows[0][0]}
-      return result
+
+      id = rows[0][0]
+      logging.info('Sessions > Created : {0}'.format(id))
+      return {'id': id}
   
   def delete(self, sessionId, **args):
     sql = """
