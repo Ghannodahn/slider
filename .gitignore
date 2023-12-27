@@ -45,3 +45,6 @@ Thumbs.db
 
 # Python
 __pycache__/
+
+# Local Passwords
+env_variables.yaml
