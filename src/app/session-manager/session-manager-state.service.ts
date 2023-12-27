@@ -66,7 +66,7 @@ export class SessionManagerStateService {
   public getNextSessionPos(session: Session) : number {
     var lastPos = -1;
 
-    session.performers.forEach(function(performer) {
+    session.performers!.forEach(function(performer) {
       if (performer.sessionPos > lastPos) {
         lastPos = performer.sessionPos;
       }
@@ -89,7 +89,7 @@ export class SessionManagerStateService {
 
   public addPerformer(session: Session, performer: Performer) {
     this.isPerformerLoading = true;
-    session.performers.push(performer);
+    session.performers!.push(performer);
     this.dirtyPerformer = newPerformer();
 
     this.performersService.addPerformer(performer)
@@ -105,23 +105,23 @@ export class SessionManagerStateService {
   }
 
   public reorderPerformers(session: Session) {
-    for (var i = 0; i < session.performers.length; ++i) {
-      session.performers[i].sessionPos = i;
+    for (var i = 0; i < session.performers!.length; ++i) {
+      session.performers![i].sessionPos = i;
     }
 
     this.sessionsService.update(session)
       .subscribe(() => { });
 
-    this.performersService.reorderPerformers(session.performers)
+    this.performersService.reorderPerformers(session.performers!)
       .subscribe(() => { });
   }
 
   public deletePerformer(session: Session, performer: Performer) {
-    let selectedIndex = session.performers.indexOf(performer);
+    let selectedIndex = session.performers!.indexOf(performer);
     this.selectedPerformer = 
       this.getNextPerformer(session) || 
-      session.performers[session.performers.length - 2];
-    session.performers.splice(selectedIndex, 1);
+      session.performers![session.performers!.length - 2];
+    session.performers!.splice(selectedIndex, 1);
     
     this.performersService.deletePerformer(performer)
       .subscribe(() => { });
@@ -129,13 +129,13 @@ export class SessionManagerStateService {
 
   public getNextPerformer(session: Session): Performer | null {
     if (this.isPerformerSelected) {
-      let selectedIndex = session.performers.indexOf(this.selectedPerformer);
+      let selectedIndex = session.performers!.indexOf(this.selectedPerformer);
 
-      if (selectedIndex === session.performers.length - 1) {
+      if (selectedIndex === session.performers!.length - 1) {
         // Last Item
         return null;
       } else {
-        return session.performers[++selectedIndex];
+        return session.performers![++selectedIndex];
       }
     } else {
       // No selection

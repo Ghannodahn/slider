@@ -5,7 +5,7 @@ export interface Session {
   startTime: Date;
   endTime: Date;
   currentPos: number | null;
-  performers: Performer[];
+  performers?: Performer[];
 }
 
 export var EmptySession = newSession();

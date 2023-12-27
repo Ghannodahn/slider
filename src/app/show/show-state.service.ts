@@ -17,7 +17,7 @@ export class ShowStateService {
   autoRefreshMs: number = 5000;
 
   public get performers(): Performer[] {
-    return this.currentSession.performers;
+    return this.currentSession.performers!;
   }
 
   triggerRefresh(sessionId: Number) {

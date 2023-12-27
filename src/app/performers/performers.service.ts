@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { Performer } from './performer';
-import { NewId } from '../data/data';
+import { NewId } from '../data/new-id';
 
 export interface PerformerReorderRequest {
   id: Number,

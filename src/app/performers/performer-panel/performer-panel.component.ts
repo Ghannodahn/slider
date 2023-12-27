@@ -39,7 +39,7 @@ export class PerformerPanelComponent {
     var selectedPerformer = this.stateService.selectedPerformer;
     var performers = this.stateService.selectedSession!.performers;
     
-    return (performers.indexOf(selectedPerformer) === 0);
+    return (performers!.indexOf(selectedPerformer) === 0);
   }
 
   get isLastSelected(): boolean {
@@ -49,7 +49,7 @@ export class PerformerPanelComponent {
     var selectedPerformer = this.stateService.selectedPerformer;
     var performers = this.stateService.selectedSession!.performers;
     
-    return (performers.indexOf(selectedPerformer) === (performers.length - 1));
+    return (performers!.indexOf(selectedPerformer) === (performers!.length - 1));
   }
 
   cancelEdit() {
@@ -98,13 +98,13 @@ export class PerformerPanelComponent {
 
   onClickMoveUp(performer: Performer) {
     var session = this.stateService.selectedSession!;
-    var currentIdx = session.performers.indexOf(performer);
+    var currentIdx = session.performers!.indexOf(performer);
     if (currentIdx == 0) {
       throw "Target performer is first in the list and cannot be moved up.";
     }
 
     var previousIdx = currentIdx - 1;
-    var previousPerformer = session.performers[previousIdx];
+    var previousPerformer = session.performers![previousIdx];
 
     if (session.currentPos != null) {
       if (currentIdx == session.currentPos) {
@@ -114,7 +114,7 @@ export class PerformerPanelComponent {
       }
     }
 
-    session.performers.splice(
+    session.performers!.splice(
       previousIdx, 2, performer, previousPerformer);
 
     this.stateService.reorderPerformers(session);
@@ -122,13 +122,13 @@ export class PerformerPanelComponent {
 
   onClickMoveDown(performer: Performer) {
     var session = this.stateService.selectedSession!;
-    var currentIdx = session.performers.indexOf(performer);
-    if (currentIdx >= session.performers.length - 1) {
+    var currentIdx = session.performers!.indexOf(performer);
+    if (currentIdx >= session.performers!.length - 1) {
       throw "Target performer is last in the list and cannot be moved down.";
     }
 
     var nextIdx = currentIdx + 1;
-    var nextPerformer = session.performers[nextIdx];
+    var nextPerformer = session.performers![nextIdx];
 
     if (session.currentPos != null) {
       if (session.currentPos == currentIdx) {
@@ -138,7 +138,7 @@ export class PerformerPanelComponent {
       }
     }
 
-    session.performers.splice(
+    session.performers!.splice(
       currentIdx, 2, nextPerformer, performer);
       
     this.stateService.reorderPerformers(session);
