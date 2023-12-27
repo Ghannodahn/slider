@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SessionManagerComponent } from './session-manager.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('SessionManagerComponent', () => {
   let component: SessionManagerComponent;
@@ -8,7 +9,10 @@ describe('SessionManagerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SessionManagerComponent]
+      imports: [
+        HttpClientTestingModule,
+        SessionManagerComponent
+      ]
     })
     .compileComponents();
     

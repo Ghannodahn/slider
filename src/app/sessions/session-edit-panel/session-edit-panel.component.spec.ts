@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SessionEditPanelComponent } from './session-edit-panel.component';
 
-describe('PerformerPanelComponent', () => {
+describe('SessionEditPanelComponent', () => {
   let component: SessionEditPanelComponent;
   let fixture: ComponentFixture<SessionEditPanelComponent>;
 

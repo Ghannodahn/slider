@@ -1,5 +1,5 @@
 <div
-  class="performer-new-panel">
+  class="performer-new-panel" *ngIf="performer">
   <div class="input-row">
     <input type="text" [(ngModel)]="performer!.displayName" #ctrl="ngModel">
     <label>Display Name</label>

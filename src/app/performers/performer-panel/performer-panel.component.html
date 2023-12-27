@@ -30,7 +30,8 @@
   <div class="section-body">
    <slider-loading-panel-entry
       *ngIf="stateService.isPerformerLoading"></slider-loading-panel-entry>
-    <table cellspacing="0" cellpadding="0">
+    <table cellspacing="0" cellpadding="0"
+      *ngIf="stateService.selectedSession">
       <tr 
         *ngFor="let performer of stateService.selectedSession!.performers; index as ctr"
         [class.performer-selected]="stateService.selectedPerformer === performer">

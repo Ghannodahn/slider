@@ -33,19 +33,21 @@ export class PerformerPanelComponent {
   }
 
   get isFirstSelected(): boolean {
+    if (!this.stateService.selectedSession) { return false; }
+    if (!this.stateService.selectedPerformer) { return false; }
+
     var selectedPerformer = this.stateService.selectedPerformer;
     var performers = this.stateService.selectedSession!.performers;
-
-    if (!selectedPerformer) { return false; }
     
     return (performers.indexOf(selectedPerformer) === 0);
   }
 
   get isLastSelected(): boolean {
+    if (!this.stateService.selectedSession) { return false; }
+    if (!this.stateService.selectedPerformer) { return false; }
+
     var selectedPerformer = this.stateService.selectedPerformer;
     var performers = this.stateService.selectedSession!.performers;
-
-    if (!selectedPerformer) { return false; }
     
     return (performers.indexOf(selectedPerformer) === (performers.length - 1));
   }

@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { SessionPanelComponent } from './session-panel.component';
 
@@ -8,7 +9,10 @@ describe('SessionPanelComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SessionPanelComponent]
+      imports: [
+        HttpClientTestingModule,
+        SessionPanelComponent
+      ]
     })
     .compileComponents();
     

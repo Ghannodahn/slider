@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { PerformerPanelComponent } from './performer-panel.component';
 
@@ -8,7 +9,10 @@ describe('PerformerPanelComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PerformerPanelComponent]
+      imports: [
+        HttpClientTestingModule,
+        PerformerPanelComponent
+      ]
     })
     .compileComponents();
     

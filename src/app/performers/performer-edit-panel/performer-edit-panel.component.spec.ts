@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PerformerNewPanelComponent } from './performer-edit-panel.component';
+import { PerformerEditPanelComponent } from './performer-edit-panel.component';
 
-describe('PerformerPanelComponent', () => {
-  let component: PerformerNewPanelComponent;
-  let fixture: ComponentFixture<PerformerNewPanelComponent>;
+describe('PerformerEditPanelComponent', () => {
+  let component: PerformerEditPanelComponent;
+  let fixture: ComponentFixture<PerformerEditPanelComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PerformerNewPanelComponent]
+      imports: [PerformerEditPanelComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(PerformerNewPanelComponent);
+    fixture = TestBed.createComponent(PerformerEditPanelComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
