@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Performer, EmptyPerformer } from '../performers/performer';
 import { SessionsService } from '../sessions/sessions.service';
 import { EmptySession, Session } from '../sessions/session';
+import { catchError, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +20,22 @@ export class ShowStateService {
     return this.currentSession.performers;
   }
 
+  triggerRefresh(sessionId: Number) {
+    setTimeout(() => { this.refresh(sessionId); }, this.autoRefreshMs);
+  }
+
   refresh(sessionId: Number) {
     this.sessionsService.get(sessionId)
+      .pipe(
+        catchError((err: Error) => {
+          var msg = 'Session > Refresh > ' + sessionId + ' : Failed';
+          console.error(msg);
+
+          setTimeout(() => { this.refresh(sessionId); }, this.autoRefreshMs);
+ 
+          return throwError(() => new Error(msg));
+        })
+      )
       .subscribe(session => {
         this.currentSession = session;
 
@@ -28,7 +43,7 @@ export class ShowStateService {
           this.currentPerformer = this.performers[session.currentPos];
         }
 
-        setTimeout(() => { this.refresh(sessionId); }, this.autoRefreshMs);
+        this.triggerRefresh(session.sessionId);
       });
   }
 
