@@ -5,14 +5,11 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { RouterTestingModule } from '@angular/router/testing';
 import { Session } from './session';
 import { NewId } from '../data/new-id';
+import { TestData } from '../testing/test-data';
 
 describe('SessionsService', () => {
   let service: SessionsService;
   let httpController: HttpTestingController;
-
-  const SESSION_NEW: Session = {sessionId: 0, startTime: new Date("2023-12-10 19:00:00"), endTime: new Date("2023-12-10 23:00:00"), currentPos: null};
-  const SESSION_1: Session = {sessionId: 1, startTime: new Date("2023-12-01 19:00:00"), endTime: new Date("2023-12-01 23:00:00"), currentPos: null};
-  const SESSION_2: Session = {sessionId: 2, startTime: new Date("2023-12-06 19:00:00"), endTime: new Date("2023-12-01 23:30:00"), currentPos: null};
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -44,7 +41,7 @@ describe('SessionsService', () => {
   });
 
   it('should LIST sessions', () => {
-    var EXPECTED: Session[] = [SESSION_1];
+    var EXPECTED: Session[] = [TestData.Sessions[1]];
 
     service.list().subscribe(sessions => {
       expect(sessions).toEqual(EXPECTED);
@@ -58,7 +55,7 @@ describe('SessionsService', () => {
   });
 
   it('should GET a session', () => {
-    var EXPECTED: Session = SESSION_1;
+    var EXPECTED: Session = TestData.Sessions[1];
     var PROVIDED: number = 1;
 
     service.get(PROVIDED).subscribe(session => {
@@ -74,7 +71,7 @@ describe('SessionsService', () => {
 
   it('should CREATE a session and return an ID', () => {
     var EXPECTED: NewId = {id: 1};
-    var PROVIDED: Session = SESSION_NEW;
+    var PROVIDED: Session = TestData.NewSession;
 
     service.create(PROVIDED).subscribe(newId => {
       expect(newId).toBe(EXPECTED);
@@ -89,18 +86,23 @@ describe('SessionsService', () => {
   });
 
   it('should UPDATE a session', () => {
-    var EXPECTED: string = '';
-    var PROVIDED: Session = SESSION_2;
-
+    var RESPONSE: string = '';
+    var PROVIDED: Session = TestData.Sessions[2];
+    var EXPECTED_REQUEST: Session = {
+      sessionId: PROVIDED.sessionId,
+      startTime: PROVIDED.startTime,
+      endTime: PROVIDED.endTime,
+      currentPos: PROVIDED.currentPos
+    }
+   
     service.update(PROVIDED).subscribe(() => {
       // Add success messaging.
     });
 
     var req = httpController.expectOne('data/session/edit');
     expect(req.request.method).toEqual('PUT');
-    console.log(PROVIDED);
-    expect(req.request.body).toEqual({params: PROVIDED});
-    req.flush(EXPECTED);
+    expect(req.request.body).toEqual({params: EXPECTED_REQUEST});
+    req.flush(RESPONSE);
 
     httpController.verify;
   });
