@@ -1,0 +1,18 @@
+service: slider
+runtime: python39
+
+includes:
+  - env_variables.yaml
+
+# By default these are read from an external, .gitignore'd file.
+# env_variables:
+#  DB_INSTANCE: "project:region:instance"
+#  DB_USER: "username"
+#  DB_PASS: "password"
+#  DB_NAME: "database_name"
+
+handlers:
+
+- url: /.*
+  script: auto
+  login: required
